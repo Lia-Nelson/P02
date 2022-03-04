@@ -1,3 +1,4 @@
 Format: firstL -- TIMESTAMP -- changes and/or additions
 ---------------------------------------------------------------------------------------------------------------------
-juliaN -- 2022-03-04 21:34 -- submodule linkination performed and devlog updated
+juliaN -- 2022-03-03 21:34 -- submodule linkination performed and devlog updated
+juliaN, lucasT, lieselW, tomasA -- 2022-03-04 8:40  -- updates to devlog

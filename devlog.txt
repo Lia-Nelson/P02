@@ -5,3 +5,6 @@ juliaN, lucasT, lieselW, tomasA -- 2022-03-04 8:40  -- updates to devlog
 juliaN -- 2022-03-04 13:14 -- web APIs for project explored
 juliaN -- 2022-03-06 20:07 -- deliverables for Monday completed
 lucasT -- 2022-03-07 21:30 -- updated devlog with feedback
+juliaN -- 2022-03-06 23:00 -- droplet added to site map, duckies added to design
+document, meaning of generate rhythms clarified, user interaction with canvas
+rephrased, new version of design document added to repository

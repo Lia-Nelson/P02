@@ -9,3 +9,4 @@ juliaN -- 2022-03-07 23:00 -- droplet added to site map, duckies added to design
 document, meaning of generate rhythms clarified, user interaction with canvas
 rephrased, new version of design document added to repository
 lucasT -- 2022-03-08 08:18 -- created folders for repository
+juliaN -- 2022-03-08 8:33 -- requirements.txt and app.py added

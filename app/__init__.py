@@ -15,6 +15,23 @@ def disp_homePage():
 def disp_registerPage():
     return render_template("register.html")
 
+@app.route("/auth", methods=['GET', 'POST'])
+def auth():
+    if (request.method == 'POST'): #conditional for 'POST' method or 'GET' method
+        user = request.form['username']
+        pas = request.form['password']
+
+        if (user & pas):
+            return render_template("home.html")
+        else:
+            return render_template("login.html", error = "Something is wrong.")
+
+    else: #not post?
+        user = request.args['username']
+        pas = request.args['password']
+
+    return render_template("home.html")
+
 if __name__ == "__main__":
     app.debug = True
     app.run()

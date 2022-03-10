@@ -20,12 +20,13 @@ def auth():
     if (request.method == 'POST'): #conditional for 'POST' method or 'GET' method
         user = request.form['username']
         pas = request.form['password']
-
-        if (user & pas):
-            return render_template("home.html")
-        else:
-            return render_template("login.html", error = "Something is wrong.")
-
+        try:
+            if (user == "admin" & pas == "admin"):
+                return render_template("home.html")
+            else:
+                return render_template("login.html", error = "Something is wrong.")
+        except:
+            return render_template("wrong.html")
     else: #not post?
         user = request.args['username']
         pas = request.args['password']

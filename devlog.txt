@@ -12,3 +12,4 @@ rephrased, new version of design document added to repository
 lucasT -- 2022-03-08 08:18 -- created folders for repository
 juliaN -- 2022-03-08 8:33 -- requirements.txt and app.py added
 lieselW -- 2022-03-04 13:13 -- added database to liesel branch
+lucasT -- 2022-03-10 21:34 -- Mergew ltw branch with main to add new html pages (login page)

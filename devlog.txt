@@ -13,3 +13,4 @@ juliaN -- 2022-03-08 8:33 -- requirements.txt and app.py added
 juliaN -- 2022-03-09 8:40 -- exploration of Web Audio API
 juliaN -- 2022-03-10 8:39 -- work on setting up durations for notes
 juliaN -- 2022-03-11 8:40 -- work on metronome
+juliaN -- 2022-03-14 8:37 -- metronome improved, now consistent

@@ -21,4 +21,56 @@ c.execute("""
       highScore INTEGER
     )""")
 
-#funciton that rewrites databse file 
+#####################
+#                   #
+# Utility Functions #
+#                   #
+#####################
+#liesel plz make a function that rewrites database file
+def register_user(username, password):
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    #single quotes doesn't let you add in newlines
+    c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?)", (username,))
+    row = c.fetchone()
+
+    if row is not None:
+        return False
+
+    c.execute("""INSERT INTO users (username, password) VALUES(?, ?)""", (username, password))
+    db.commit()
+    db.close()
+    return True
+
+def check_login(username, password):
+    """
+    Tries to add the given username and password into the database.
+    Returns False if the user already exists, True if it successfully added the user.
+    """
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+
+    c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND password = ?", (username,password))
+    row = c.fetchone()
+
+    if row is None:
+        return False
+
+    db.close()
+    return True
+
+def display():
+    """
+    Query all rows in the tasks table
+    :param conn: the Connection object
+    :return:
+    """
+    db = sqlite3.connect(DB_FILE)
+    cur = db.cursor()
+    cur.execute("SELECT * FROM users")
+
+    rows = cur.fetchall()
+
+    for row in rows:
+        print(row)

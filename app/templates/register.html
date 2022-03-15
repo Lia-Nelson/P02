@@ -8,8 +8,17 @@
   <head>
     Register Page
     </head>
+
+  <p> {{explain}} </p>
   <body>
-    <p> Sorry, we are still working on this. Please come back later. </p> <br>
+    <p> Hi Click here and fill stuff yayayayayayyy </p> <br>
+    <form action="/auth" method = 'POST'>
+      Username: <input type="text" class="form-control" id = "username" name="username">
+      Password: <input type="password" class="form-control" id="password" name="password">
+      <button type = "submit" class="btn btn-secondary btn-lg" formaction="/register"> Register </button>
+    </form>
+
+    <br>
 
     <form action="/">
       <button type = "submit" formaction="/"> Return to Login </button>

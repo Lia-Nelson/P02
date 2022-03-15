@@ -1,5 +1,9 @@
-body  {
+div  {
 background: #DBBBF5;
+}
+
+div.special {
+  background: #805D93;
 }
 
 

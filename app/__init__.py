@@ -4,8 +4,12 @@
 
 from flask import Flask, render_template, request, session, redirect
 import sqlite3
+from os import urandom
+import database
 
 app = Flask(__name__)    #create Flask object
+
+app.secret_key = urandom(24)
 
 def logged_in():
     """
@@ -15,31 +19,15 @@ def logged_in():
 
 @app.route("/")
 def disp_homePage():
-    #check islogin_method() --> redirect
-    return render_template("login.html")
+    if logged_in():
+        return redirect("/home")
+    return redirect("/login")
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
     if logged_in():
-        return redirect("/")
-
-    if request.method == 'GET': #just getting to the page with no inputs
-        return render_template("login.html")
-
-    username = request.form["username"]
-    password = request.form["password"]
-
-    if username.strip() == "" or password.strip() == "":
-        return render_template("login.html",  message = "Username or Password cannot be blank")
-
-    # Verify this user and password exists
-    check_info = database.check_login(username, password)
-    if check_info is False:
-        return render_template("login.html", message = "Username or Password is incorrect")
-
-    # Adds user and user id to session if all is well
-    session["user"] = username
-    return redirect("/")
+        return redirect("/home")
+    return render_template("login.html")
 
 @app.route("/logout")
 def logout():
@@ -50,8 +38,14 @@ def logout():
         session.pop("user")
     return redirect("/")
 
-@app.route("/register", methods=['GET', 'POST'])
+@app.route("/displayRegister")
 def disp_registerPage():
+    if logged_in():
+        return redirect("/home")
+    return render_template("register.html")
+
+@app.route("/register", methods=['GET', 'POST'])
+def register():
     """
     Retrieves user inputs from signup page.
     Checks it against the database to make sure the information is unique.
@@ -61,18 +55,20 @@ def disp_registerPage():
         return redirect("/")
 
     # Default page
-    if request.method == "GET":
-        return render_template("register.html")
+    # if request.method == "GET":        # else:
+    #     #     username = "meow"
+    #     #     password = "meow"
+    #     return render_template("register.html")
 
     # Check sign up
-    user = request.form["newusername"]
-    pwd = request.form["newpassword"]
+    user = request.form["username"]
+    pwd = request.form["password"]
     if user.strip() == "" or pwd.strip() == "":
         return render_template("register.html", explain="Username or Password cannot be blank")
 
-    # Add user information if passwords match
-    if (request.form["newpassword"] != request.form["newpassword1"]):
-        return render_template("register.html", explain="The passwords do not match")
+    # # Add user information if passwords match
+    # if (request.form["password"] != request.form["password"]):
+    #     return render_template("register.html", explain="The passwords do not match")
 
     register_success = database.register_user(user, pwd) #checks if not successful in the database file
     if not register_success:
@@ -81,20 +77,34 @@ def disp_registerPage():
         return redirect("/login")
     #goes to register page
 
-@app.route("/auth", methods=['POST'])
+@app.route("/auth", methods=['GET', 'POST'])
 def auth():
-    if (request.method == 'POST'): #conditional for 'POST' method
-        user= request.form.get('username')
-        pas = request.form.get('password')
-        try:
-            if checkLogin(user,pas):
-                #login_method()
-                return redirect("/home") #checks whether user and pass pair are correct -> login
-            else:
-                return render_template("login.html", error = "Something is wrong.")
-        except Exception as e:
-            return render_template("wrong.html", error = e)
-    return render_template("wrong.html") #only way to get in should be with POST method
+    try:
+        # faildadaad
+        # if (request.method == 'POST'):
+        username = request.form.get('username')
+        password = request.form.get('password') #does it alawys work>>>?????????? who knows
+        # else:
+        #     username = "meow"
+        #     password = "meow"
+
+        if username.strip() == "" or password.strip() == "":
+            return render_template("login.html", error = "Username or Password cannot be blank")
+
+        # Verify this user and password exists
+        check_info = database.check_login(username, password)
+        if check_info is False:
+            return render_template("login.html", error = "Username or Password is incorrect")
+
+        # Adds user and user id to session if all is well
+        session["user"] = username
+        return redirect("/")
+
+    except Exception as e:
+        username = request.form.get('username')
+        password = request.form.get('password')
+        print(username + ": user, " + password + ": pass")
+        return render_template("wrong.html", error = e)
 
 @app.route("/home")
 def disp_home():
@@ -106,11 +116,6 @@ def disp_home():
 @app.route("/instruct")
 def disp_Instructions():
     return render_template("instructions.html") #L
-
-@app.route("/logout")
-def logout():
-    #logout_method()
-    return redirect("/")
 
 @app.route("/select")
 def disp_selectionPage():

@@ -9,10 +9,11 @@ lucasT -- 2022-03-07 21:30 -- updated devlog with feedback
 juliaN -- 2022-03-07 23:00 -- droplet added to site map, duckies added to design
 document, meaning of generate rhythms clarified, user interaction with canvas
 rephrased, new version of design document added to repository
-lucasT -- 2022-03-08 08:18 -- created folders for repository
+lucasT -- 2022-03-08 8:18 -- created folders for repository
 juliaN -- 2022-03-08 8:33 -- requirements.txt and app.py added
 lieselW -- 2022-03-04 13:13 -- added database to liesel branch
 lucasT -- 2022-03-10 21:34 -- merged ltw branch with main to add new html pages
 (login page)
 juliaN -- 2022-03-10 22:59 -- new version of design doc in repo, launch codes
 added
+lucasT, lieselW -- 2022-03-15 8:40 -- Login with database implimented into main branch

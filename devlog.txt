@@ -20,6 +20,7 @@ juliaN -- 2022-03-10 22:59 -- new version of design doc in repo, launch codes
 added
 juliaN -- 2022-03-11 8:40 -- work on metronome
 juliaN -- 2022-03-14 8:37 -- metronome improved, now consistent
-lucasT, lieselW -- 2022-03-15 8:40 -- Login with database implimented into main branch
+lucasT, lieselW -- 2022-03-15 8:40 -- Login with database implemented into main branch
 juliaN -- 2022-03-15 8:41 -- work on rhythm generation
 juliaN -- 2022-03-16 8:37 -- rhythm generation functional
+juliaN -- 2022-03-17 8:38 -- work on making functions from rhythm generation for import

@@ -2,6 +2,7 @@ Format: firstL -- TIMESTAMP -- changes and/or additions
 ---------------------------------------------------------------------------------------------------------------------
 juliaN -- 2022-03-03 21:34 -- submodule linkination performed and devlog updated
 juliaN, lucasT, lieselW, tomasA -- 2022-03-04 8:40  -- updates to devlog
+lieselW -- 2022-03-04 13:13 -- added database to liesel branch
 juliaN -- 2022-03-04 13:14 -- web APIs for project explored
 juliaN -- 2022-03-06 20:07 -- deliverables for Monday completed
 lieselW -- 2022-03-07 8:40 -- edited design document
@@ -9,10 +10,16 @@ lucasT -- 2022-03-07 21:30 -- updated devlog with feedback
 juliaN -- 2022-03-07 23:00 -- droplet added to site map, duckies added to design
 document, meaning of generate rhythms clarified, user interaction with canvas
 rephrased, new version of design document added to repository
-lucasT -- 2022-03-08 08:18 -- created folders for repository
+lucasT -- 2022-03-08 8:18 -- created folders for repository
 juliaN -- 2022-03-08 8:33 -- requirements.txt and app.py added
-lieselW -- 2022-03-04 13:13 -- added database to liesel branch
+juliaN -- 2022-03-09 8:40 -- exploration of Web Audio API
+juliaN -- 2022-03-10 8:39 -- work on setting up durations for notes
 lucasT -- 2022-03-10 21:34 -- merged ltw branch with main to add new html pages
 (login page)
 juliaN -- 2022-03-10 22:59 -- new version of design doc in repo, launch codes
 added
+juliaN -- 2022-03-11 8:40 -- work on metronome
+juliaN -- 2022-03-14 8:37 -- metronome improved, now consistent
+lucasT, lieselW -- 2022-03-15 8:40 -- Login with database implimented into main branch
+juliaN -- 2022-03-15 8:41 -- work on rhythm generation
+juliaN -- 2022-03-16 8:37 -- rhythm generation functional

@@ -24,3 +24,4 @@ lucasT, lieselW -- 2022-03-15 8:40 -- Login with database implemented into main 
 juliaN -- 2022-03-15 8:41 -- work on rhythm generation
 juliaN -- 2022-03-16 8:37 -- rhythm generation functional
 juliaN -- 2022-03-17 8:38 -- work on making functions from rhythm generation for import
+juliaN -- 2022-03-18 8:40 -- rhythm generation functions working

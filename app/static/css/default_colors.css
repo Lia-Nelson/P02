@@ -1,0 +1,16 @@
+div  {
+background: #DBBBF5;
+}
+
+.special {
+  background: #805D93;
+}
+
+h1.forms {
+  background: #805D93;
+  color: #252627;
+}
+
+p.error {
+  background: red;
+}

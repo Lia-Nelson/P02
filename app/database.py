@@ -1,4 +1,5 @@
 import sqlite3
+import hashlib
 
 # from flask import Flask
 
@@ -27,6 +28,26 @@ c.execute("""
 #                   #
 #####################
 #liesel plz make a function that rewrites database file
+def get_hash_pass(password):
+    password = "really-secure-password123"
+    password = password.encode() # converts your string to bytes
+    password_hash = hashlib.sha512(password) # use the sha-512 algorithm to generate a hash digest
+    return password_hash.hexdigest() # prints the hash digest as a sequence of base-16 digits
+    # return password_hash.hexdigest()
+
+def check_hash(username, password):
+    given_pass = get_hash_pass(password)
+    db = sqlite3.connect(DB_FILE)
+    c = db.cursor()
+    c.execute("SELECT * FROM users WHERE password = (?)", (given_pass,))
+    row = c.fetchone()
+
+    if row is None: 
+        db.close()
+        return False
+    db.close()
+    return True 
+
 def register_user(username, password):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
@@ -38,7 +59,8 @@ def register_user(username, password):
     if row is not None:
         return False
 
-    c.execute("""INSERT INTO users (username, password) VALUES(?, ?)""", (username, password))
+    hashed_pass = get_hash_pass(password)
+    c.execute("""INSERT INTO users (username, password) VALUES(?, ?)""", (username, hashed_pass))
     db.commit()
     db.close()
     return True
@@ -50,8 +72,8 @@ def check_login(username, password):
     """
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
-
-    c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND password = ?", (username,password))
+    hashed_pass = get_hash_pass(password)
+    c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND password = ?", (username,hashed_pass))
     row = c.fetchone()
 
     if row is None:

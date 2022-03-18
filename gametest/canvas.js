@@ -26,5 +26,5 @@ function drawSlider(time) {
   let pos = time * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
-  ctx.strokeRect(rowPos * width, startY + fullHeight * row + so, 0, sh);
+  ctx.strokeRect(x + rowPos * width, startY + fullHeight * row + so, 0, sh);
 }

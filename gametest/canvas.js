@@ -18,6 +18,8 @@ let startY = (slate.height + space - rows * fullHeight) / 2;
 let ssy = startY + (height - sliderHeight) / 2;
 
 ctx.lineWidth = boxWidth;
+ctx.strokeStyle = boxColor;
+ctx.fillStyle = sliderColor;
 
 function drawRows() {
   for (let row = 0; row < rows; row ++) {

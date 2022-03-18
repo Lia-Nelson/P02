@@ -8,7 +8,7 @@ let cols = 4;
 let sliderHeight = 75;
 let boxWidth = 1;
 let boxColor = "#000000";
-let siderWidth = 2;
+let sliderWidth = 2;
 let sliderColor = "#00d990";
 
 let colWidth = width / cols;
@@ -17,7 +17,7 @@ let fullHeight = height + space;
 let startY = (slate.height + space - rows * fullHeight) / 2;
 let ssy = startY + (height - sliderHeight) / 2;
 
-ctx.lineWidth = lineWidth;
+ctx.lineWidth = boxWidth;
 
 function drawRows() {
   for (let row = 0; row < rows; row ++) {

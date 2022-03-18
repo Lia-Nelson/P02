@@ -8,11 +8,11 @@ function drawRow(x, y, width, height, cols) {
   }
 }
 
-function drawRows(width, height, space, number, cols) {
+function drawRows(width, height, space, rows, cols) {
   let x = (slate.width - width) / 2;
   let fullHeight = height + space;
-  let startY = (slate.height + space - number * fullHeight) / 2;
-  for (let i = 0; i < number; i ++) {
+  let startY = (slate.height + space - rows * fullHeight) / 2;
+  for (let i = 0; i < rows; i ++) {
     drawRow(x, startY + fullHeight * i, width, height, cols);
   }
 }

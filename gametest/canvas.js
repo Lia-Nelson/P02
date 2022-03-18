@@ -11,7 +11,7 @@ let colWidth = width / cols;
 let x = (slate.width - width) / 2;
 let fullHeight = height + space;
 let startY = (slate.height + space - rows * fullHeight) / 2;
-let so = (height - sh) / 2;
+let ssy = startY + (height - sh) / 2;
 
 function drawRows() {
   for (let row = 0; row < rows; row ++) {
@@ -26,5 +26,5 @@ function drawSlider(time) {
   let pos = time * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
-  ctx.strokeRect(x + rowPos * width, startY + fullHeight * row + so, 0, sh);
+  ctx.strokeRect(x + width * rowPos, ssy + fullHeight * row, 0, sh);
 }

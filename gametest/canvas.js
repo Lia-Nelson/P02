@@ -40,3 +40,9 @@ function drawSlider(time) {
 function clear() {
   ctx.clearRect(0, 0, slate.width, slate.height);
 }
+
+function draw(time) {
+  clear();
+  drawRows();
+  drawSlider(time);
+}

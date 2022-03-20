@@ -36,3 +36,7 @@ function drawSlider(time) {
   let row = pos - rowPos;
   ctx.fillRect(startX + width * rowPos, ssy + fullHeight * row, sliderWidth, sliderHeight);
 }
+
+function clear() {
+  ctx.clearRect(0, 0, slate.width, slate.height);
+}

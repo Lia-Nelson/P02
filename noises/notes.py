@@ -48,13 +48,13 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
         # code = str(duration) + "%@!"
         # one in three chance of being a rest
         if (random.randint(0,2) == 0):
-          note["type"] = "rest"
+          note["note"] = False
           note["triplet"] = False
           # in_measure.append("rest")
           # in_measure.append(False)
           # code += "R%@!F"
         else:
-          note["type"] = "note"
+          note["note"] = True
           # in_measure.append("note")
           if (
           (selection["triplet"] == True) and

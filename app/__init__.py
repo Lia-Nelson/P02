@@ -111,7 +111,9 @@ def auth():
 def disp_home():
     #check login_method()
     if logged_in(): #later to be replaced with check login
-        return render_template("home.html")
+        user = session["user"]
+        highscore = database.display_score(user)
+        return render_template("home.html", username = user, score = highscore)
     return render_template("wrong.html") #if not logged in, give error
 
 @app.route("/instruct")

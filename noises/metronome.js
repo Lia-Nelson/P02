@@ -4,33 +4,28 @@ var context = new AudioContext();
 var timer, noteCount;
 var curTime = 0.0;
 
-// will be recieved from user
-// beats per measure
-var bpm = 4;
-// tempo
-var tempo = 100;
-
-// seconds per beat
-var spb = 60 / tempo;
-
 // scheduler, run every .1 milliseconds
-	function schedule() {
+	function schedule(tempo, bpm) {
+		console.log("Tempo: " + tempo)
+		console.log("Bpm: " + bpm)
     while(curTime < context.currentTime) {
 			// playNote(curTime);
-      playNote(context.currentTime);
-			updateTime();
+      playNote(context.currentTime, bpm);
+			updateTime(tempo);
 		}
 
 	}
 
   // Adds a beat worth to time and increase note count
-  	function updateTime() {
+  	function updateTime(tempo) {
+			// seconds per beat
+			var spb = 60 / tempo;
   		curTime += spb;
   		noteCount++;
   	}
 
     // Plays note starting at time t
-    	function playNote(t) {
+    	function playNote(t, bpm) {
     		var note = context.createOscillator();
 
         // sets noteCount to 0 when end of
@@ -67,11 +62,13 @@ var spb = 60 / tempo;
     // starts metronome by setting interval for
     // schedule,, setting the current time in
     // program and setting the noteCount to 0
-    function metronomeOn() {
+		// tempo gives beats per minute
+		// bpm gives beats per measure
+    function metronomeOn(tempo, bpm) {
       console.log("starting");
       noteCount = 0;
       curTime = context.currentTime;
-      timer = setInterval(schedule, .1);
+      timer = setInterval(schedule, .1, tempo, bpm);
     }
 
     // stops metronome by clearing interval

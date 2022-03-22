@@ -85,13 +85,13 @@ def display_score(username):
     db = sqlite3.connect(DB_FILE)
     cur = db.cursor()
     # print("good1")
-    cur.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?)", (username,))
+    cur.execute("SELECT highScore FROM users WHERE LOWER(username) = LOWER(?)", (username,))
     # print("good2")
-    row = cur.fetchone()
-    if row is None:
+    score = cur.fetchone()[0]
+    if score is None:
         return 0
     else:
-        return row[2]
+        return score
 
 def update_score(username, score):
     db = sqlite3.connect(DB_FILE)

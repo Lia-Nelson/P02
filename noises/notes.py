@@ -42,7 +42,7 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
         note["triplet"] = False
       else:
         note["note"] = True
-        # 1/3 chance of remaining a triplet
+        # one in three chance of remaining a triplet
         if (note["triplet"] and random.randint(0, 2) != 0):
           note["triplet"] = False
       in_measure.append(note)

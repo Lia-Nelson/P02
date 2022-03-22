@@ -41,12 +41,9 @@ def check_hash(username, password):
     c = db.cursor()
     c.execute("SELECT * FROM users WHERE password = (?)", (given_pass,))
     row = c.fetchone()
-
-    if row is None:
-        db.close()
-        return False
     db.close()
-    return True
+
+    return row is not None
 
 def register_user(username, password):
     db = sqlite3.connect(DB_FILE)
@@ -57,6 +54,7 @@ def register_user(username, password):
     row = c.fetchone()
 
     if row is not None:
+        db.close()
         return False
 
     hashed_pass = get_hash_pass(password)
@@ -77,11 +75,9 @@ def check_login(username, password):
     c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND password = ?", (username,hashed_pass))
     row = c.fetchone()
     print("row:", row)
-    if row is None:
-        return False
-
     db.close()
-    return True
+
+    return row is not None
 
 def display_score(username):
     # print("good0")
@@ -105,12 +101,13 @@ def update_score(username, score):
     # print(row)
     # print("hi")
     if row is None:
-        return False
-    else:
-        cur.execute("""UPDATE users SET highScore = (?) WHERE LOWER(username) = LOWER(?)""", (score, username))
-        db.commit()
         db.close()
-        return True
+        return False
+
+    cur.execute("""UPDATE users SET highScore = (?) WHERE LOWER(username) = LOWER(?)""", (score, username))
+    db.commit()
+    db.close()
+    return True
 
 def delete_all():
     db = sqlite3.connect(DB_FILE)

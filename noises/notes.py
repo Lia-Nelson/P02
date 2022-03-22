@@ -31,8 +31,8 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
     print("Current measure: " + str(i))
     remaining = bpm / beatNote
     maxIndex = len(notes) - 1
-    print(remaining)
-    print(maxIndex)
+    print("Remaining: " + str(remaining))
+    print("Max index: " + str(maxIndex))
     while remaining > 0:
       index = random.randint(0, maxIndex)
       selection = notes[index]
@@ -73,7 +73,7 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
             print("remaining: " + str(remaining))
             # print("code: " + code)
             # generated.append(code)
-      in_measure.append(note)
+        in_measure.append(note)
     generated.append(in_measure)
   return generated
 

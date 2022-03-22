@@ -11,6 +11,11 @@ app = Flask(__name__)    #create Flask object
 
 app.secret_key = urandom(24)
 
+tempo_Top = 1;
+tempo_Bot = 1;
+score = 0;
+lives = 3;
+
 def logged_in():
     """
     Returns True if the user is in session.
@@ -91,7 +96,7 @@ def auth():
         if check_info is False:
             return render_template("login.html", error = "Username or Password is incorrect")
 
-        # Adds user and user id to session if all is well
+        # Adds user and user page_id to session if all is well
         session["user"] = username
         return redirect("/")
 
@@ -104,7 +109,7 @@ def auth():
 @app.route("/home")
 def disp_home():
     #check login_method()
-    if True: #later to be replaced with check login
+    if logged_in: #later to be replaced with check login
         return render_template("home.html")
     return render_template("wrong.html") #if not logged in, give error
 
@@ -114,18 +119,42 @@ def disp_Instructions():
 
 @app.route("/select")
 def disp_selectionPage():
-    #check islogin_method()
-    return render_template("selection.html")
+    if logged_in:
+        global tempo_Top
+        global tempo_Bot
+        global score
+        global lives
+        return render_template("selection.html", top=tempo_Top, bot=tempo_Bot, score = score, lives = lives)
+    return render_template("wrong.html")
+
+@app.route("/selectTop/<page_id>")
+def changeTop(page_id):
+   global tempo_Top
+   tempo_Top = page_id
+   return redirect("/select")
+
+@app.route("/owselectBot/<page_id>")
+def changeBot(page_id):
+   global tempo_Bot
+   tempo_Bot = page_id
+   return redirect("/select")
+
 
 @app.route("/game")
 def disp_gamePage():
-    #check islogin_method()
-    render_template("game.html")
+    if logged_in:
+        global tempo_Top
+        global tempo_Bot
+        global score
+        global lives
+        render_template("game.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
+    return render_template("wrong.html")
 
 @app.route("/results")
 def disp_results():
-    #check islogin_method()
-    render_template("results")
+    if logged_in:
+        render_template("results.html")
+    return render_template("wrong.html")
 
 if __name__ == "__main__":
     app.debug = True

@@ -60,6 +60,42 @@ def check_login(username, password):
     db.close()
     return True
 
+def display_score(username):
+    # print("good0")
+    # Returns password from inputed username
+    db = sqlite3.connect(DB_FILE)
+    cur = db.cursor()
+    # print("good1")
+    cur.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?)", (username,))
+    # print("good2")
+    row = cur.fetchone()
+    if row is None:
+        return 0
+    else:
+        return row[2]
+
+def update_score(username, score):
+    db = sqlite3.connect(DB_FILE)
+    cur = db.cursor()
+    cur.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?)", (username,))
+    row = cur.fetchone()
+    # print(row)
+    # print("hi")
+    if row is None:
+        return False
+    else:
+        cur.execute("""UPDATE users SET highScore = (?) WHERE LOWER(username) = LOWER(?)""", (score, username))
+        db.commit()
+        db.close()
+        return True
+
+def delete_all():
+    db = sqlite3.connect(DB_FILE)
+    cur = db.cursor()
+    cur.execute("""DELETE FROM users WHERE TRUE""")
+    db.commit()
+    db.close()
+
 def display():
     """
     Query all rows in the tasks table

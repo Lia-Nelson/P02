@@ -138,7 +138,7 @@ def changeTop(page_id):
    tempo_Top = page_id
    return redirect("/select")
 
-@app.route("/selectBot/<page_id>")
+@app.route("/owselectBot/<page_id>")
 def changeBot(page_id):
    global tempo_Bot
    tempo_Bot = page_id

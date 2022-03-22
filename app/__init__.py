@@ -45,7 +45,7 @@ def logout():
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-    """
+    """Start
     Retrieves user inputs from signup page.
     Checks it against the database to make sure the information is unique.
     Adds information to the "users" database table.
@@ -160,7 +160,13 @@ def disp_gamePage():
 @app.route("/results")
 def disp_results():
     if logged_in():
-        render_template("results.html")
+        global score
+        old_score = database.display_score(session["user"])
+        yay = score > old_score
+        if yay:
+            database.update_score(session["user"], score)
+
+        render_template("results.html", score = score, newhighscore = yay)
     return render_template("wrong.html")
 
 if __name__ == "__main__":

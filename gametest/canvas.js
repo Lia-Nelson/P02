@@ -10,6 +10,7 @@ let boxWidth = 1;
 let boxColor = "#000000";
 let sliderWidth = 2;
 let sliderColor = "#00d990";
+let totalTime = "10000";
 
 let colWidth = width / cols;
 let startX = (slate.width - width) / 2;
@@ -44,5 +45,28 @@ function clear() {
 function draw(time) {
   clear();
   drawRows();
-  drawSlider(time);
+  drawSlider(time / totalTime);
+}
+
+let startTime = 0;
+let lastEnd = 0;
+let requestID;
+
+function dibujar(timestamp) {
+  if (lastEnd !==) {
+    console.log(startTime);
+    startTime = timestamp - lastEnd;
+    lastEnd = undefined;
+  }
+  draw(timestamp - startTime);
+  requestID = window.requestAnimationFrame(dibujar);
+}
+
+function stop() {
+  window.requestAnimationFrame(
+    function (timestamp) {
+      lastEnd = timestamp;
+      window.cancelAnimationFrame(requestID);
+    }
+  );
 }

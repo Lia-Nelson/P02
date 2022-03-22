@@ -52,7 +52,7 @@ def register():
     Adds information to the "users" database table.
     """
     if logged_in():
-        return redirect("/")
+        return redirect("/home")
 
     # Default page
     # if request.method == "GET":        # else:
@@ -81,8 +81,8 @@ def auth():
     try:
         # faildadaad
         # if (request.method == 'POST'):
-        username = request.form.get('username')
-        password = request.form.get('password') #does it alawys work>>>?????????? who knows
+        username = request.form["username"]
+        password = request.form["password"] #does it alawys work>>>?????????? who knows
         # else:
         #     username = "meow"
         #     password = "meow"
@@ -100,8 +100,8 @@ def auth():
         return redirect("/")
 
     except Exception as e:
-        username = request.form.get('username')
-        password = request.form.get('password')
+        username = request.form["username"]
+        password = request.form["password"]
         print(username + ": user, " + password + ": pass")
         return render_template("wrong.html", error = e)
 

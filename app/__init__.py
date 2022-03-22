@@ -38,12 +38,6 @@ def logout():
         session.pop("user")
     return redirect("/")
 
-@app.route("/displayRegister")
-def disp_registerPage():
-    if logged_in():
-        return redirect("/home")
-    return render_template("register.html")
-
 @app.route("/register", methods=['GET', 'POST'])
 def register():
     """
@@ -59,6 +53,8 @@ def register():
     #     #     username = "meow"
     #     #     password = "meow"
     #     return render_template("register.html")
+    if len(request.form) == 0:
+        return render_template("register.html")
 
     # Check sign up
     user = request.form["username"]

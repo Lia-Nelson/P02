@@ -18,7 +18,7 @@
       <div class="col">
 
         <h1>
-          Welcome to DOINK!
+          Welcome to DOINK! <strong> {{username}} </strong>
         </h1>
 
         <h2>
@@ -39,19 +39,8 @@
       </div>
       <!-- Col 1 - Welcome, description, instructions, buttons for select and logout -->
       <div class="col">
-        <h1> leaderboard </h1>
-        <table class="table table-striped table-hover leaderboard aa">
-            <tr>
-              <th style="border: solid white">&nbsp; &nbsp; Name &nbsp; &nbsp;</th>
-              <th style="border: solid white">&nbsp; &nbsp; Score &nbsp; &nbsp;</th>
-            </tr>
-            {% for names in leaders %}
-            <tr>
-            <td>{{ names }}</td>
-            <td>{{ leaders[names] }}</td>
-            </tr>
-            {% endfor %}
-        </table>
+        <h1> <strong> Score </strong> <h1>
+        <p> {{score}} </p>
       </div>
       <!-- Col 2 - leaderboard -->
     </div>

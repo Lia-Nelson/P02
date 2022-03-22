@@ -1,11 +1,5 @@
 import random
 
-# # note gets beat
-# beatNote = 4
-#
-# # beats per measure
-# bpm = 4
-
 # number of measures
 measures = 8
 
@@ -34,38 +28,25 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
     print("Remaining: " + str(remaining))
     print("Max index: " + str(maxIndex))
     while remaining > 0:
+      print("measure: " + str(i))
+      print("remaining: " + str(remaining))
       index = random.randint(0, maxIndex)
       note = notes[index].copy()
-      # print(selection)
-      # print(duration)
       if (note["duration"] > remaining):
         maxIndex = index - 1;
       else:
         remaining -= note["duration"]
-        # in_measure.append(duration)
-        # code = str(duration) + "%@!"
         # one in three chance of being a rest
         if (random.randint(0,2) == 0):
           note["note"] = False
           note["triplet"] = False
-          # in_measure.append("rest")
-          # in_measure.append(False)
-          # code += "R%@!F"
         else:
           note["note"] = True
-          # in_measure.append("note")
           if (note["triplet"] == True and random.randint(0, 2) != 0):
             note["triplet"] = False
-            # in_measure.append(False)
-            # code += "N%@!F"
-            print("measure: " + str(i))
-            print("remaining: " + str(remaining))
-            # print("code: " + code)
-            # generated.append(code)
         in_measure.append(note)
     generated.append(in_measure)
   return generated
 
 print(generate_rhythms(4, 4))
 print(generate_rhythms(3, 8))
-# print(generated)

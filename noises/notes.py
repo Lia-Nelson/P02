@@ -56,12 +56,7 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
         else:
           note["note"] = True
           # in_measure.append("note")
-          if (
-          (selection["triplet"] == True) and
-          # from 2/3 chance of notes, 1/3 chance
-          # of being made a triplet
-          (random.randint(0, 2) == 0)
-          ):
+          if (selection["triplet"] == True and random.randint(0, 2) == 0):
            note["triplet"] = True
            # in_measure.append(True)
            # code += "N%@!T"

@@ -71,10 +71,9 @@ def register():
     #     return render_template("register.html", explain="The passwords do not match")
 
     register_success = database.register_user(user, pwd) #checks if not successful in the database file
-    if not register_success:
-        return render_template("register.html", explain="Username already exists")
-    else:
+    if register_success:
         return redirect("/login")
+    return render_template("register.html", explain="Username already exists")
     #goes to register page
 
 @app.route("/auth", methods=['GET', 'POST'])

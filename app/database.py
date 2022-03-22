@@ -29,7 +29,7 @@ c.execute("""
 #####################
 #liesel plz make a function that rewrites database file
 def get_hash_pass(password):
-    password = "really-secure-password123"
+    # password = "really-secure-password123"
     password = password.encode() # converts your string to bytes
     password_hash = hashlib.sha512(password) # use the sha-512 algorithm to generate a hash digest
     return password_hash.hexdigest() # prints the hash digest as a sequence of base-16 digits
@@ -42,11 +42,11 @@ def check_hash(username, password):
     c.execute("SELECT * FROM users WHERE password = (?)", (given_pass,))
     row = c.fetchone()
 
-    if row is None: 
+    if row is None:
         db.close()
         return False
     db.close()
-    return True 
+    return True
 
 def register_user(username, password):
     db = sqlite3.connect(DB_FILE)
@@ -73,9 +73,10 @@ def check_login(username, password):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     hashed_pass = get_hash_pass(password)
+    print("hashed_pass:", hashed_pass)
     c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND password = ?", (username,hashed_pass))
     row = c.fetchone()
-
+    print("row:", row)
     if row is None:
         return False
 

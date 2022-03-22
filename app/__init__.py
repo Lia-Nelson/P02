@@ -93,6 +93,7 @@ def auth():
 
         # Verify this user and password exists
         check_info = database.check_login(username, password)
+        # print("result:", check_info)
         if check_info is False:
             return render_template("login.html", error = "Username or Password is incorrect")
 
@@ -109,7 +110,7 @@ def auth():
 @app.route("/home")
 def disp_home():
     #check login_method()
-    if logged_in: #later to be replaced with check login
+    if logged_in(): #later to be replaced with check login
         return render_template("home.html")
     return render_template("wrong.html") #if not logged in, give error
 
@@ -119,7 +120,7 @@ def disp_Instructions():
 
 @app.route("/select")
 def disp_selectionPage():
-    if logged_in:
+    if logged_in():
         global tempo_Top
         global tempo_Bot
         global score
@@ -129,20 +130,24 @@ def disp_selectionPage():
 
 @app.route("/selectTop/<page_id>")
 def changeTop(page_id):
-   global tempo_Top
-   tempo_Top = page_id
-   return redirect("/select")
+    if logged_in():
+        global tempo_Top
+        tempo_Top = page_id
+        return redirect("/select")
+    return render_template("wrong.html")
 
 @app.route("/owselectBot/<page_id>")
 def changeBot(page_id):
-   global tempo_Bot
-   tempo_Bot = page_id
-   return redirect("/select")
+    if logged_in():
+        global tempo_Bot
+        tempo_Bot = page_id
+        return redirect("/select")
+    return render_template("wrong.html")
 
 
 @app.route("/game")
 def disp_gamePage():
-    if logged_in:
+    if logged_in():
         global tempo_Top
         global tempo_Bot
         global score
@@ -152,7 +157,7 @@ def disp_gamePage():
 
 @app.route("/results")
 def disp_results():
-    if logged_in:
+    if logged_in():
         render_template("results.html")
     return render_template("wrong.html")
 

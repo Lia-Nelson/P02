@@ -15,6 +15,11 @@ notes = [
   {"duration": 3/2, "triplet": False}
 ]
 
+def get_max_index(remaining):
+  for i in range(len(notes) - 1, -1, -1):
+    if notes[i]["duration"] <= remaining:
+      return i
+
 def generate_rhythms(bpm:int, beatNote:int) -> list:
   generated = []
   print("Measures: " + str(measures))
@@ -24,27 +29,22 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
     in_measure = []
     print("Current measure: " + str(i))
     remaining = bpm / beatNote
-    maxIndex = len(notes) - 1
     print("Remaining: " + str(remaining))
-    print("Max index: " + str(maxIndex))
     while remaining > 0:
       print("measure: " + str(i))
       print("remaining: " + str(remaining))
-      index = random.randint(0, maxIndex)
-      note = notes[index].copy()
-      if (note["duration"] > remaining):
-        maxIndex = index - 1;
+      maxIndex = get_max_index(remaining)
+      note = notes[random.randint(0, maxIndex)].copy()
+      remaining -= note["duration"]
+      # one in three chance of being a rest
+      if (random.randint(0,2) == 0):
+        note["note"] = False
+        note["triplet"] = False
       else:
-        remaining -= note["duration"]
-        # one in three chance of being a rest
-        if (random.randint(0,2) == 0):
-          note["note"] = False
+        note["note"] = True
+        if (note["triplet"] and random.randint(0, 2) != 0):
           note["triplet"] = False
-        else:
-          note["note"] = True
-          if (note["triplet"] == True and random.randint(0, 2) != 0):
-            note["triplet"] = False
-        in_measure.append(note)
+      in_measure.append(note)
     generated.append(in_measure)
   return generated
 

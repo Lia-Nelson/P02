@@ -35,15 +35,13 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
     print("Max index: " + str(maxIndex))
     while remaining > 0:
       index = random.randint(0, maxIndex)
-      selection = notes[index]
+      note = notes[index].copy()
       # print(selection)
-      duration = selection["duration"]
       # print(duration)
-      if (duration > remaining):
+      if (note["duration"] > remaining):
         maxIndex = index - 1;
       else:
-        note = {"duration": duration}
-        remaining -= duration
+        remaining -= note["duration"]
         # in_measure.append(duration)
         # code = str(duration) + "%@!"
         # one in three chance of being a rest
@@ -56,11 +54,7 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
         else:
           note["note"] = True
           # in_measure.append("note")
-          if (selection["triplet"] == True and random.randint(0, 2) == 0):
-           note["triplet"] = True
-           # in_measure.append(True)
-           # code += "N%@!T"
-          else:
+          if (note["triplet"] == True and random.randint(0, 2) != 0):
             note["triplet"] = False
             # in_measure.append(False)
             # code += "N%@!F"

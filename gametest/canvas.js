@@ -67,6 +67,9 @@ function drawNote(ptime, note) {
   else if (note.duration == 1/2) {
     drawImage(ptime, halfNote, 0.7, 0.5);
   }
+  else if (note.duration == 1) {
+    drawImage(ptime, wholeNote, 0.18, 0.75);
+  }
 }
 
 function draw(time) {
@@ -74,6 +77,7 @@ function draw(time) {
   drawRows();
   drawNote(0.3, {duration: 1/4});
   drawNote(0.7, {duration: 1/2});
+  drawNote(0.4, {duration: 1});
   drawSlider(time / totalTime);
 }
 

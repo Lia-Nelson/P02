@@ -30,28 +30,28 @@ function drawRows() {
   }
 }
 
-function drawThing(func, ptime, thingWidth, thingHeight) {
+function drawThing(func, ptime, width, height) {
   let pos = ptime * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
-  let x = startX + boxWidth * rowPos - thingWidth / 2;
-  let y = startY + fullHeight * row + (boxHeight - thingHeight) / 2;
-  func(x, y, thingWidth, thingHeight);
+  let x = startX + boxWidth * rowPos - width / 2;
+  let y = startY + fullHeight * row + (boxHeight - height) / 2;
+  func(x, y, width, height);
 }
 
-function sliderHelper(x, y, w, h) {
-  ctx.fillRect(x, y, w, h);
+function sliderHelper(x, y, width, height) {
+  ctx.fillRect(x, y, width, height);
 }
 
 function drawSlider(ptime) {
   drawThing(sliderHelper, ptime, sliderWidth, sliderHeight);
 }
 
-function drawImage(ptime, image, imageHeight) {
-  function imageHelper(x, y, w, h) {
-    ctx.drawImage(image, x, y, w, h);
+function drawImage(ptime, image, height) {
+  function imageHelper(x, y, width, height) {
+    ctx.drawImage(image, x, y, width, height);
   }
-  drawThing(imageHelper, ptime, imageHeight * image.width / image.height, imageHeight);
+  drawThing(imageHelper, ptime, height * image.width / image.height, height);
 }
 
 function clear() {

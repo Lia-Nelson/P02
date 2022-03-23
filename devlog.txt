@@ -20,7 +20,8 @@ juliaN -- 2022-03-10 22:59 -- new version of design doc in repo, launch codes
 added
 juliaN -- 2022-03-11 8:40 -- work on metronome
 juliaN -- 2022-03-14 8:37 -- metronome improved, now consistent
-lucasT, lieselW -- 2022-03-15 8:40 -- Login with database implemented into main branch
+lucasT, lieselW -- 2022-03-15 8:40 -- login with database implemented into main
+branch
 juliaN -- 2022-03-15 8:41 -- work on rhythm generation
 juliaN -- 2022-03-16 8:37 -- rhythm generation functional
 lieselW -- 2022-03-16 8:40 -- researched password hashing // started code
@@ -30,6 +31,10 @@ juliaN -- 2022-03-18 8:40 -- rhythm generation functions working
 juliaN -- 2022-03-21 8:37 -- work on how to guide, modified rhythm generation functions
 juliaN -- 2022-03-22 8:29 -- Web Audio API documentation added
 juliaN -- 2022-03-22 8:42 -- metronome parameterized
-lucasT -- 2022-03-22 15:51 -- Merged ltw branch and liesel branch into main
-lucasT, tomasA -- 2022-03-22 16:06 -- fixed password always being sus, prevented accesses without login
-lucasT -- 2022-03-22 16:40 -- design-doc-v01, removes leaderboard feature, adds ability to view self score through home page
+lucasT -- 2022-03-22 15:51 -- merged ltw branch and liesel branch into main
+lucasT, tomasA -- 2022-03-22 16:06 -- fixed password always being sus, prevented
+accesses without login
+lucasT -- 2022-03-22 16:40 -- design-doc-v01, removes leaderboard feature, adds
+ability to view self score through home page
+juliaN -- 2022-03-23 18:47 -- note guide google document created to make meaning
+of rhythms generated clear

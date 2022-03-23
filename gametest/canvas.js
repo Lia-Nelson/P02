@@ -10,7 +10,7 @@ let boxWidth = 1;
 let boxColor = "#000000";
 let sliderWidth = 2;
 let sliderColor = "#00d990";
-let totalTime = "10000";
+let totalTime = 5000;
 
 let colWidth = width / cols;
 let startX = (slate.width - width) / 2;
@@ -31,8 +31,8 @@ function drawRows() {
   }
 }
 
-function drawSlider(time) {
-  let pos = time * rows;
+function drawSlider(ptime) {
+  let pos = ptime * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
   ctx.fillRect(startX + width * rowPos, ssy + fullHeight * row, sliderWidth, sliderHeight);
@@ -48,25 +48,12 @@ function draw(time) {
   drawSlider(time / totalTime);
 }
 
-let startTime = 0;
-let lastEnd = 0;
-let requestID;
+let startTime;
 
 function dibujar(timestamp) {
-  if (lastEnd !==) {
-    console.log(startTime);
-    startTime = timestamp - lastEnd;
-    lastEnd = undefined;
+  if (startTime === undefined) {
+    startTime = timestamp;
   }
   draw(timestamp - startTime);
   requestID = window.requestAnimationFrame(dibujar);
-}
-
-function stop() {
-  window.requestAnimationFrame(
-    function (timestamp) {
-      lastEnd = timestamp;
-      window.cancelAnimationFrame(requestID);
-    }
-  );
 }

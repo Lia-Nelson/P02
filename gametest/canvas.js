@@ -23,12 +23,12 @@ ctx.lineWidth = boxWidth;
 ctx.strokeStyle = boxColor;
 ctx.fillStyle = sliderColor;
 
-function getxy(ptime, thingHeight) {
+function getxy(ptime, thingWidth, thingHeight) {
   let pos = ptime * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
   return {
-    x: startX + width * rowPos,
+    x: startX + width * rowPos - thingWidth / 2,
     y: startY + fullHeight * row + (height - thingHeight) / 2
   }
 }
@@ -43,8 +43,8 @@ function drawRows() {
 }
 
 function drawSlider(ptime) {
-  let place = getxy(ptime, sliderHeight);
-  ctx.fillRect(place.x - sliderWidth / 2, place.y, sliderWidth, sliderHeight);
+  let place = getxy(ptime, sliderWidth, sliderHeight);
+  ctx.fillRect(place.x, place.y, sliderWidth, sliderHeight);
 }
 
 function clear() {

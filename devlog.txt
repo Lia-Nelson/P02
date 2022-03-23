@@ -30,3 +30,6 @@ juliaN -- 2022-03-18 8:40 -- rhythm generation functions working
 juliaN -- 2022-03-21 8:37 -- work on how to guide, modified rhythm generation functions
 juliaN -- 2022-03-22 8:29 -- Web Audio API documentation added
 juliaN -- 2022-03-22 8:42 -- metronome parameterized
+lucasT -- 2022-03-22 15:51 -- Merged ltw branch and liesel branch into main
+lucasT, tomasA -- 2022-03-22 16:06 -- fixed password always being sus, prevented accesses without login
+lucasT -- 2022-03-22 16:40 -- design-doc-v01, removes leaderboard feature, adds ability to view self score through home page

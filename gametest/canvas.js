@@ -60,11 +60,20 @@ function clear() {
   ctx.clearRect(0, 0, slate.width, slate.height);
 }
 
+function drawNote(ptime, note) {
+  if (note.duration == 1/4) {
+    drawImage(ptime, quarterNote, 0.7);
+  }
+  else if (note.duration == 1/2) {
+    drawImage(ptime, halfNote, 0.7);
+  }
+}
+
 function draw(time) {
   clear();
   drawRows();
-  drawImage(0.3, quarterNote, 0.7);
-  drawImage(0.7, halfNote, 0.7);
+  drawNote(0.3, {duration: 1/4});
+  drawNote(0.7, {duration: 1/2});
   drawSlider(time / totalTime);
 }
 

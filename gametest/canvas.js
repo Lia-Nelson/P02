@@ -62,7 +62,7 @@ function clear() {
 
 function drawNote(ptime, note) {
   if (note.duration == 1/8) {
-    drawImage(ptime, eighthNote, 0.7, 0.5, 0.5);
+    drawImage(ptime, eighthNote, 0.7, 0.3, 0.5);
   }
   else if (note.duration == 1/4) {
     drawImage(ptime, quarterNote, 0.7, 0.5, 0.5);

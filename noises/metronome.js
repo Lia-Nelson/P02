@@ -5,13 +5,15 @@ var timer, noteCount;
 var curTime = 0.0;
 
 // scheduler, run every .1 milliseconds
-function schedule(tempo, bpm) {
-	console.log("Tempo: " + tempo)
-	console.log("Bpm: " + bpm)
-  while(curTime < context.currentTime) {
-		// playNote(curTime);
-    playNote(context.currentTime, bpm);
-		updateTime(tempo);
+	function schedule(tempo, bpm) {
+		// console.log("Tempo: " + tempo)
+		// console.log("Bpm: " + bpm)
+    while(curTime < context.currentTime) {
+			// playNote(curTime);
+      playNote(context.currentTime, bpm);
+			updateTime(tempo);
+		}
+
 	}
 }
 

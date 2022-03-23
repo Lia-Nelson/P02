@@ -30,13 +30,13 @@ function drawRows() {
   }
 }
 
-function drawThing(func, ptime, width, pheight, where) {
+function drawThing(func, ptime, width, pheight, whereX, whereY) {
   let height = boxHeight * pheight;
   let pos = ptime * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
-  let x = startX + boxWidth * rowPos - width / 2;
-  let y = startY + fullHeight * row + (boxHeight - height) / 2 + (where - 0.5) * boxHeight;
+  let x = startX + boxWidth * rowPos - width * whereX;
+  let y = startY + fullHeight * row + (boxHeight - height) / 2 + (whereY - 0.5) * boxHeight;
   func(x, y, width, height);
 }
 
@@ -45,15 +45,15 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  drawThing(sliderHelper, ptime, sliderWidth, sliderPheight, 0.5);
+  drawThing(sliderHelper, ptime, sliderWidth, sliderPheight, 0.5, 0.5);
 }
 
-function drawImage(ptime, image, pheight, where) {
+function drawImage(ptime, image, pheight, whereX, whereY) {
   function imageHelper(x, y, width, height) {
     ctx.drawImage(image, x, y, width, height);
   }
   let width = boxHeight * pheight * image.width / image.height;
-  drawThing(imageHelper, ptime, width, pheight, where);
+  drawThing(imageHelper, ptime, width, pheight, whereX, whereY);
 }
 
 function clear() {
@@ -62,16 +62,16 @@ function clear() {
 
 function drawNote(ptime, note) {
   if (note.duration == 1/8) {
-    drawImage(ptime, eighthNote, 0.7, 0.5);
+    drawImage(ptime, eighthNote, 0.7, 0.5, 0.5);
   }
   else if (note.duration == 1/4) {
-    drawImage(ptime, quarterNote, 0.7, 0.5);
+    drawImage(ptime, quarterNote, 0.7, 0.5, 0.5);
   }
   else if (note.duration == 1/2) {
-    drawImage(ptime, halfNote, 0.7, 0.5);
+    drawImage(ptime, halfNote, 0.7, 0.5, 0.5);
   }
   else if (note.duration == 1) {
-    drawImage(ptime, wholeNote, 0.18, 0.75);
+    drawImage(ptime, wholeNote, 0.18, 0.5, 0.75);
   }
 }
 

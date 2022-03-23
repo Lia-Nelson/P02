@@ -16,11 +16,21 @@ let colWidth = width / cols;
 let startX = (slate.width - width) / 2;
 let fullHeight = height + space;
 let startY = (slate.height + space - rows * fullHeight) / 2;
-let ssy = startY + (height - sliderHeight) / 2;
+let ssy = (height - sliderHeight) / 2;
 
 ctx.lineWidth = boxWidth;
 ctx.strokeStyle = boxColor;
 ctx.fillStyle = sliderColor;
+
+function getxy(ptime) {
+  let pos = ptime * rows;
+  let rowPos = pos % 1;
+  let row = pos - rowPos;
+  return {
+    x: startX + width * rowPos,
+    y: startY + fullHeight * row
+  }
+}
 
 function drawRows() {
   for (let row = 0; row < rows; row ++) {
@@ -32,10 +42,8 @@ function drawRows() {
 }
 
 function drawSlider(ptime) {
-  let pos = ptime * rows;
-  let rowPos = pos % 1;
-  let row = pos - rowPos;
-  ctx.fillRect(startX + width * rowPos, ssy + fullHeight * row, sliderWidth, sliderHeight);
+  let place = getxy(ptime);
+  ctx.fillRect(place.x, place.y + ssy, sliderWidth, sliderHeight);
 }
 
 function clear() {

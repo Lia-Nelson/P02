@@ -5,7 +5,7 @@ let boxHeight = 70;
 let space = 20;
 let rows = 2;
 let cols = 4;
-let sliderHeight = 75;
+let sliderPheight = 1.07;
 let boxThick = 1;
 let boxColor = "#000000";
 let sliderWidth = 2;
@@ -30,7 +30,8 @@ function drawRows() {
   }
 }
 
-function drawThing(func, ptime, width, height) {
+function drawThing(func, ptime, width, pheight) {
+  let height = boxHeight * pheight;
   let pos = ptime * rows;
   let rowPos = pos % 1;
   let row = pos - rowPos;
@@ -44,15 +45,15 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  drawThing(sliderHelper, ptime, sliderWidth, sliderHeight);
+  drawThing(sliderHelper, ptime, sliderWidth, sliderPheight);
 }
 
-function drawImage(ptime, image, height) {
+function drawImage(ptime, image, pheight) {
   function imageHelper(x, y, width, height) {
     ctx.drawImage(image, x, y, width, height);
   }
-  let width = height * image.width / image.height;
-  drawThing(imageHelper, ptime, width, height);
+  let width = boxHeight * pheight * image.width / image.height;
+  drawThing(imageHelper, ptime, width, pheight);
 }
 
 function clear() {
@@ -62,8 +63,8 @@ function clear() {
 function draw(time) {
   clear();
   drawRows();
-  drawImage(0.3, quarterNote, 50);
-  drawImage(0.7, halfNote, 50);
+  drawImage(0.3, quarterNote, 0.7);
+  drawImage(0.7, halfNote, 0.7);
   drawSlider(time / totalTime);
 }
 

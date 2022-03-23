@@ -49,11 +49,11 @@ function drawSlider(ptime) {
   drawThing(sliderHelper, ptime, sliderWidth, sliderHeight);
 }
 
-function drawImage(ptime, image) {
+function drawImage(ptime, image, imageHeight) {
   function imageHelper(x, y, w, h) {
     ctx.drawImage(image, x, y, w, h);
   }
-  drawThing(imageHelper, ptime, image.width, image.height);
+  drawThing(imageHelper, ptime, imageHeight * image.width / image.height, imageHeight);
 }
 
 function clear() {
@@ -63,7 +63,7 @@ function clear() {
 function draw(time) {
   clear();
   drawRows();
-  drawImage(0.3, quarterNote);
+  drawImage(0.3, quarterNote, 50);
   drawSlider(time / totalTime);
 }
 

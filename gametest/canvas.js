@@ -51,7 +51,8 @@ function drawImage(ptime, image, height) {
   function imageHelper(x, y, width, height) {
     ctx.drawImage(image, x, y, width, height);
   }
-  drawThing(imageHelper, ptime, height * image.width / image.height, height);
+  let width = height * image.width / image.height;
+  drawThing(imageHelper, ptime, width, height);
 }
 
 function clear() {
@@ -62,6 +63,7 @@ function draw(time) {
   clear();
   drawRows();
   drawImage(0.3, quarterNote, 50);
+  drawImage(0.7, halfNote, 50);
   drawSlider(time / totalTime);
 }
 

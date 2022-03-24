@@ -1,5 +1,7 @@
 let wholeNote = new Image();
 wholeNote.src = "images/whole_note.svg";
+let wholeRest = new Image();
+wholeRest.src = "images/whole_rest.svg"
 let halfNote = new Image();
 halfNote.src = "images/half_note.svg";
 let quarterNote = new Image();

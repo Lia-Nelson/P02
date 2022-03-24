@@ -122,8 +122,8 @@ function drawNote(ptime, note) {
   }
 }
 
-function drawNotes(ml, notes) {
-  let totalPlace = rows * cols * ml;
+function drawNotes() {
+  let totalPlace = rows * cols * measureLength;
   let place = 0;
   for (let note of notes) {
     drawNote(place / totalPlace, note);
@@ -134,7 +134,7 @@ function drawNotes(ml, notes) {
 function draw(time) {
   clear();
   drawRows();
-  drawNotes(measureLength, notes);
+  drawNotes();
   drawDot(0.8, 0.1, 0.75);
   drawSlider(time / totalTime);
 }

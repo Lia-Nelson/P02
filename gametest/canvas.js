@@ -30,6 +30,10 @@ function drawRows() {
   }
 }
 
+function clear() {
+  ctx.clearRect(0, 0, slate.width, slate.height);
+}
+
 function drawThing(func, ptime, width, pheight, whereX, whereY) {
   let height = boxHeight * pheight;
   let pos = ptime * rows;
@@ -54,10 +58,6 @@ function drawImage(ptime, image, pheight, whereX, whereY) {
   }
   let width = boxHeight * pheight * image.width / image.height;
   drawThing(imageHelper, ptime, width, pheight, whereX, whereY);
-}
-
-function clear() {
-  ctx.clearRect(0, 0, slate.width, slate.height);
 }
 
 function drawNote(ptime, note) {

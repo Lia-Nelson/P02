@@ -71,10 +71,10 @@ def check_login(username, password):
     db = sqlite3.connect(DB_FILE)
     c = db.cursor()
     hashed_pass = get_hash_pass(password)
-    print("hashed_pass:", hashed_pass)
+    # print("hashed_pass:", hashed_pass)
     c.execute("SELECT * FROM users WHERE LOWER(username) = LOWER(?) AND password = ?", (username,hashed_pass))
     row = c.fetchone()
-    print("row:", row)
+    # print("row:", row)
     db.close()
 
     return row is not None

@@ -20,6 +20,7 @@ let startX = (slate.width - boxWidth) / 2;
 let fullHeight = boxHeight + space;
 let startY = (slate.height + space - rows * fullHeight) / 2;
 let measureLength = bpm / beatNote;
+let totalPlace = rows * cols * measureLength;
 
 ctx.lineWidth = boxThick;
 ctx.strokeStyle = boxColor;
@@ -123,7 +124,6 @@ function drawNote(ptime, note) {
 }
 
 function drawNotes() {
-  let totalPlace = rows * cols * measureLength;
   let place = 0;
   for (let note of notes) {
     drawNote(place / totalPlace, note);

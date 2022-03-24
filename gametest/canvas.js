@@ -60,6 +60,17 @@ function drawImage(ptime, image, pheight, whereX, whereY) {
   drawThing(imageHelper, ptime, width, pheight, whereX, whereY);
 }
 
+function dotHelper(x, y, width, height) {
+  ctx.beginPath();
+  let radius = height / 2;
+  ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
+  ctx.fill();
+}
+
+function drawDot(ptime, psize, whereY) {
+  drawThing(dotHelper, ptime, boxHeight * psize, psize, 0.5, whereY);
+}
+
 function drawNote(ptime, note) {
   if (note.duration == 1) {
     drawImage(ptime, wholeNote, 0.18, 0.5, 0.75);
@@ -86,6 +97,7 @@ function draw(time) {
   drawNote(0.6, {duration: 1/16});
   drawNote(0.4, {duration: 1});
   drawNote(0.45, {duration: 1/8});
+  drawDot(0.8, 0.1, 0.75);
   drawSlider(time / totalTime);
 }
 

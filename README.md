@@ -29,5 +29,5 @@ or <br>
 Droplet IP: 192.241.1.156.9/
 
 ## APIs
-No APIs from API KB used
-However [Web Audio API with how-to guide](https://github.com/stuy-softdev/notes-and-code/blob/main/how-to/howto_use-web-audio-api.md) is used
+No APIs from API KB used.  
+However [Web Audio API with how-to guide](https://github.com/stuy-softdev/notes-and-code/blob/main/how-to/howto_use-web-audio-api.md) is used.

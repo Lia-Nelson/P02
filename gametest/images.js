@@ -16,3 +16,5 @@ let eighthRest = new Image();
 eighthRest.src = "images/eighth_rest.svg";
 let sixteenthNote = new Image();
 sixteenthNote.src = "images/sixteenth_note.svg";
+let sixteenthRest = new Image();
+sixteenthRest.src = "images/sixteenth_rest.svg";

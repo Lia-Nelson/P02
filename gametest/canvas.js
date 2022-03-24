@@ -109,6 +109,9 @@ function drawNote(ptime, note) {
     if (note.note) {
       drawImage(ptime, sixteenthNote, 0.7, 0, 0.5);
     }
+    else {
+      drawImage(ptime, sixteenthRest, 0.45, 0, 0.6);
+    }
   }
   if (note.duration == 3/2 || note.duration == 3/4 || note.duration == 3/8 || note.duration == 3/16) {
     drawDot(ptime, 0.1, -3.5, 0.75);
@@ -120,7 +123,7 @@ function draw(time) {
   drawRows();
   drawNote(0.3, {duration: 1/4, note: false});
   drawNote(0.7, {duration: 1/2, note: false});
-  drawNote(0.6, {duration: 1/16, note: true});
+  drawNote(0.6, {duration: 1/16, note: false});
   drawNote(0.4, {duration: 1, note: false});
   drawNote(0.45, {duration: 1/8, note: false});
   drawNote(0.2, {duration: 3/8, note: false});

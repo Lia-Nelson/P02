@@ -4,6 +4,7 @@ let beatNote = parseInt(document.getElementById("beatNote").innerHTML);
 let notes = JSON.parse(document.getElementById("notes").innerHTML);
 let notas = notes.map(note => Object.assign({}, note));
 let scoreElement = document.getElementById("score");
+let livesElement = document.getElementById("lives");
 let ctx = slate.getContext("2d");
 let boxWidth = 800;
 let boxHeight = 50;
@@ -153,6 +154,9 @@ function click() {
     scoreElement.innerHTML ++;
     currentNota.note = false;
   }
+  else {
+    livesElement.innerHTML --;
+  }
 }
 
 let currentNota;
@@ -175,5 +179,7 @@ function dibujar(timestamp) {
   draw(timestamp - startTime);
   window.requestAnimationFrame(dibujar);
 }
+
+slate.addEventListener("click", click);
 
 dibujar();

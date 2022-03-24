@@ -53,7 +53,7 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  if (onNote(ptime)) {
+  if (currentNote(ptime).note) {
     ctx.fillStyle = "#00ff00";
   }
   else {
@@ -136,14 +136,14 @@ function drawNotes() {
   }
 }
 
-function onNote(ptime) {
+function currentNote(ptime) {
   let place = ptime * totalPlace;
   let index = 0;
   while (place > notes[index].duration) {
     place -= notes[index].duration;
     index ++;
   }
-  return notes[index].note;
+  return notes[index];
 }
 
 function draw(time) {

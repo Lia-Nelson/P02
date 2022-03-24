@@ -12,5 +12,7 @@ let quarterRest = new Image();
 quarterRest.src = "images/quarter_rest.svg";
 let eighthNote = new Image();
 eighthNote.src = "images/eighth_note.svg";
+let eighthRest = new Image();
+eighthRest.src = "images/eighth_rest.svg";
 let sixteenthNote = new Image();
 sixteenthNote.src = "images/sixteenth_note.svg";

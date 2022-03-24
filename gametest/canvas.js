@@ -101,6 +101,9 @@ function drawNote(ptime, note) {
     if (note.note) {
       drawImage(ptime, eighthNote, 0.7, 0, 0.5);
     }
+    else {
+      drawImage(ptime, eighthRest, 0.45, 0, 0.6);
+    }
   }
   else if (note.duration == 1/16) {
     if (note.note) {
@@ -119,10 +122,10 @@ function draw(time) {
   drawNote(0.7, {duration: 1/2, note: false});
   drawNote(0.6, {duration: 1/16, note: true});
   drawNote(0.4, {duration: 1, note: false});
-  drawNote(0.45, {duration: 1/8, note: true});
+  drawNote(0.45, {duration: 1/8, note: false});
   drawNote(0.2, {duration: 3/8, note: false});
   drawNote(0.9, {duration: 3/2, note: false});
-  drawNote(0.8, {duration: 3/16, note: true});
+  drawNote(0.8, {duration: 3/16, note: false});
   drawNote(0.1, {duration: 3/4, note: false});
   drawDot(0.8, 0.1, 0.75);
   drawSlider(time / totalTime);

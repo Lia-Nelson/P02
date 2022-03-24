@@ -74,19 +74,29 @@ function drawDot(ptime, psize, whereX, whereY) {
 
 function drawNote(ptime, note) {
   if (note.duration == 1 || note.duration == 3/2) {
-    drawImage(ptime, wholeNote, 0.18, 0.5, 0.75);
+    if (note.note) {
+      drawImage(ptime, wholeNote, 0.18, 0.5, 0.75);
+    }
   }
   else if (note.duration == 1/2 || note.duration == 3/4) {
-    drawImage(ptime, halfNote, 0.7, 0.5, 0.5);
+    if (note.note) {
+      drawImage(ptime, halfNote, 0.7, 0.5, 0.5);
+    }
   }
   else if (note.duration == 1/4 || note.duration == 3/8) {
-    drawImage(ptime, quarterNote, 0.7, 0.5, 0.5);
+    if (note.note) {
+      drawImage(ptime, quarterNote, 0.7, 0.5, 0.5);
+    }
   }
   else if (note.duration == 1/8 || note.duration == 3/16) {
-    drawImage(ptime, eighthNote, 0.7, 0.3, 0.5);
+    if (note.note) {
+      drawImage(ptime, eighthNote, 0.7, 0.3, 0.5);
+    }
   }
   else if (note.duration == 1/16) {
-    drawImage(ptime, sixteenthNote, 0.7, 0.3, 0.5);
+    if (note.note) {
+      drawImage(ptime, sixteenthNote, 0.7, 0.3, 0.5);
+    }
   }
   if (note.duration == 3/2 || note.duration == 3/4 || note.duration == 3/8 || note.duration == 3/16) {
     drawDot(ptime, 0.1, -2, 0.75);
@@ -96,13 +106,13 @@ function drawNote(ptime, note) {
 function draw(time) {
   clear();
   drawRows();
-  drawNote(0.3, {duration: 1/4});
-  drawNote(0.7, {duration: 1/2});
-  drawNote(0.6, {duration: 1/16});
-  drawNote(0.4, {duration: 1});
-  drawNote(0.45, {duration: 1/8});
-  drawNote(0.2, {duration: 3/8});
-  drawNote(0.9, {duration: 3/2});
+  drawNote(0.3, {duration: 1/4, note: true});
+  drawNote(0.7, {duration: 1/2, note: true});
+  drawNote(0.6, {duration: 1/16, note: true});
+  drawNote(0.4, {duration: 1, note: true});
+  drawNote(0.45, {duration: 1/8, note: true});
+  drawNote(0.2, {duration: 3/8, note: true});
+  drawNote(0.9, {duration: 3/2, note: true});
   drawDot(0.8, 0.1, 0.75);
   drawSlider(time / totalTime);
 }

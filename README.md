@@ -1,15 +1,13 @@
 # Doink! by Doink!
 
 ## Description
-Rhythm game where the user clicks the screen on pre-ordained intervals. These are randomly generated based on the tempo and time signature.
+Rhythm game where the user clicks the screen on pre-ordained intervals. These are randomly generated based on the tempo and time signature. See if you can click a lot of notes without missing (otherwise you die) and try to rack up points from successful clicks.
 
 ## Roles
 Lia (PM): Audio/Rhythm Generation (Create Functions for JavaScript to Call)  
 LTW:  HTML + CSS (Design, Front-End)  
 Liesel: Sqlite and Python Interaction (Account-Based Interaction)  
 Tomas:  JavaScript (User Interaction and Animation)  
-
-## API Cards
 
 ## Launch Codes
 * Clone this repo:  
@@ -19,8 +17,13 @@ Tomas:  JavaScript (User Interaction and Animation)
 `$ python3 -m venv venv`  
 `$ source venv/bin/activate`
 
-* Download requirements.txt  
-`$ pip3 install -r requirements.txt `
+* Download requirements.txt <br>
+`$ pip install -r requirements.txt ` <br>
+or <br>
+`$ pip3 install -r requirements.txt `
 
 * Run the app  
 `$ python3 app/__init__.py`
+
+<br>
+Droplet IP: 192.241.1.156.9/

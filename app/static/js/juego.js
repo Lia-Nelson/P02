@@ -1,4 +1,10 @@
-let slate = document.getElementById("slate");
+let slate = document.getElementById("screen");
+let bpm = parseInt(document.getElementById("bpm").innerHTML);
+let beatNote = parseInt(document.getElementById("beatNote").innerHTML);
+let notes = JSON.parse(document.getElementById("notes").innerHTML);
+let notas = notes.map(note => Object.assign({}, note));
+let scoreElement = document.getElementById("score");
+let livesElement = document.getElementById("lives");
 let ctx = slate.getContext("2d");
 let boxWidth = 800;
 let boxHeight = 50;
@@ -10,12 +16,14 @@ let boxThick = 1;
 let boxColor = "#000000";
 let sliderWidth = 2;
 let sliderColor = "#00d990";
-let totalTime = 5000;
+let totalTime = 20000;
 
 let colWidth = boxWidth / cols;
 let startX = (slate.width - boxWidth) / 2;
 let fullHeight = boxHeight + space;
 let startY = (slate.height + space - rows * fullHeight) / 2;
+let measureLength = bpm / beatNote;
+let totalPlace = rows * cols * measureLength;
 
 ctx.lineWidth = boxThick;
 ctx.strokeStyle = boxColor;
@@ -48,7 +56,12 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  ctx.fillStyle = sliderColor;
+  if (currentNota.note) {
+    ctx.fillStyle = "#00ff00";
+  }
+  else {
+    ctx.fillStyle = "#808080";
+  }
   drawThing(sliderHelper, ptime, sliderWidth, sliderPheight, 0.5, 0.5);
 }
 
@@ -118,8 +131,7 @@ function drawNote(ptime, note) {
   }
 }
 
-function drawNotes(measureLength, notes) {
-  let totalPlace = rows * cols * measureLength;
+function drawNotes() {
   let place = 0;
   for (let note of notes) {
     drawNote(place / totalPlace, note);
@@ -127,20 +139,62 @@ function drawNotes(measureLength, notes) {
   }
 }
 
+function getCurrentNota(ptime) {
+  let place = ptime * totalPlace;
+  let index = 0;
+  while (place > notas[index].duration) {
+    place -= notas[index].duration;
+    index ++;
+  }
+  return notas[index];
+}
+
+function click() {
+  if (currentNota.note) {
+    scoreElement.innerHTML ++;
+    currentNota.note = false;
+  }
+  else {
+    livesElement.innerHTML --;
+  }
+}
+
+let currentNota;
+
 function draw(time) {
   clear();
   drawRows();
-  drawNotes(1, [{duration: 0.0625, note: true}, {duration: 0.0625, note: false}, {duration: 0.375, note: true}, {duration: 0.25, note: false}, {duration: 0.125, note: false}, {duration: 0.125, note: true}, {duration: 0.1875, note: true}, {duration: 0.1875, note: true}, {duration: 0.0625, note: false}, {duration: 0.5, note: false}, {duration: 0.0625, note: true}, {duration: 0.125, note: false}, {duration: 0.5, note: true}, {duration: 0.0625, note: true}, {duration: 0.0625, note: true}, {duration: 0.25, note: true}, {duration: 0.375, note: false}, {duration: 0.5, note: true}, {duration: 0.0625, note: true}, {duration: 0.0625, note: true}, {duration: 0.75, note: true}, {duration: 0.125, note: false}, {duration: 0.125, note: false}, {duration: 0.5, note: false}, {duration: 0.25, note: false}, {duration: 0.25, note: true}, {duration: 0.75, note: true}, {duration: 0.125, note: true}, {duration: 0.125, note: false}, {duration: 1, note: true}]);
+  drawNotes();
   drawDot(0.8, 0.1, 0.75);
-  drawSlider(time / totalTime);
+  let ptime = time / totalTime;
+  console.log(livesElement.innerHTML <= 0);
+  if (ptime >= 1 || livesElement.innerHTML <= 0) {
+    endGame();
+  }
+  currentNota = getCurrentNota(ptime);
+  drawSlider(ptime);
 }
 
 let startTime;
+let requestID;
 
 function dibujar(timestamp) {
+  window.cancelAnimationFrame(requestID);
   if (startTime === undefined) {
     startTime = timestamp;
   }
-  draw(timestamp - startTime);
-  window.requestAnimationFrame(dibujar);
+  time = timestamp - startTime;
+  draw(time);
+  let ptime = time / totalTime;
+  if (!(ptime >= 1 || livesElement.innerHTML <= 0))
+    requestID = window.requestAnimationFrame(dibujar);
 }
+
+function endGame() {
+  window.cancelAnimationFrame(requestID);
+  window.location.replace("/endgame/" + scoreElement.innerHTML + "/" + livesElement.innerHTML);
+}
+
+slate.addEventListener("click", click);
+
+dibujar();

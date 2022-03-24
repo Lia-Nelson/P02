@@ -13,16 +13,17 @@
   </head>
 
 <body class="backg">
-  <div>
-    {% if newhighscore %}
-      <h2> Congradulations, you've made a new high score!!!!!!!! </h2>
-    {% endif %}
-    <h1> {{score}} </h1>
-  </div>
-
+  <center>
+    <div>
+      {% if newhighscore %}
+        <h2> Congradulations, you've made a new high score!!!!!!!! </h2>
+      {% endif %}
+      <h1> Score: {{score}} </h1>
+    </div>
+  </center>
   <div>
     <form action="/home">
-      <button type = "submit" formaction="/select"> Home </button>
+      <button type = "submit" formaction="/home"> Home </button>
     </form>
   </div>
 </body>

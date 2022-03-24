@@ -6,7 +6,7 @@
 //   display("Error");
 // }
 
-let instructions = "No instructions yet, please wait.";
+let instructions ="Register an account then login in. You will be able to see your username and the high score you've gotten. (Which should be a 0 if you haven't started). More instructions on the home page.";
 
 let displayInstruction = function(){
   console.log("Button pressed");

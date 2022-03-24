@@ -6,13 +6,14 @@ from flask import Flask, render_template, request, session, redirect
 import sqlite3
 from os import urandom
 import database
+from get_notes import get_notes
 
 app = Flask(__name__)    #create Flask object
 
 app.secret_key = urandom(24)
 
-tempo_Top = 1;
-tempo_Bot = 1;
+tempo_bpm = 1;
+tempo_beat_note = 1;
 score = 0;
 lives = 3;
 
@@ -110,11 +111,15 @@ def auth():
 @app.route("/home")
 def disp_home():
     #check login_method()
-    if logged_in(): #later to be replaced with check login
-        user = session["user"]
-        highscore = database.display_score(user)
-        return render_template("home.html", username = user, score = highscore)
-    return render_template("wrong.html") #if not logged in, give error
+    if not logged_in():
+        return render_template("wrong.html") #if not logged in, give error
+    user = session["user"]
+    highscore = database.display_score(user)
+    global score
+    score = 0
+    global lives
+    lives = 3
+    return render_template("home.html", username = user, score = highscore)
 
 @app.route("/instruct")
 def disp_Instructions():
@@ -122,52 +127,61 @@ def disp_Instructions():
 
 @app.route("/select")
 def disp_selectionPage():
-    if logged_in():
-        global tempo_Top
-        global tempo_Bot
-        global score
-        global lives
-        return render_template("selection.html", top=tempo_Top, bot=tempo_Bot, score = score, lives = lives)
-    return render_template("wrong.html")
+    if not logged_in():
+        return render_template("wrong.html")
+    global tempo_bpm
+    global tempo_beat_note
+    global score
+    global lives
+    return render_template("selection.html", top=tempo_bpm, bot=tempo_beat_note, score = score, lives = lives)
 
 @app.route("/selectTop/<page_id>")
 def changeTop(page_id):
-    if logged_in():
-        global tempo_Top
-        tempo_Top = page_id
-        return redirect("/select")
-    return render_template("wrong.html")
+    if not logged_in():
+        return render_template("wrong.html")
+    global tempo_bpm
+    tempo_bpm = page_id
+    return redirect("/select")
 
 @app.route("/owselectBot/<page_id>")
 def changeBot(page_id):
-    if logged_in():
-        global tempo_Bot
-        tempo_Bot = page_id
-        return redirect("/select")
-    return render_template("wrong.html")
+    if not logged_in():
+        return render_template("wrong.html")
+    global tempo_beat_note
+    tempo_beat_note = page_id
+    return redirect("/select")
 
 
 @app.route("/game")
 def disp_gamePage():
-    if logged_in():
-        global tempo_Top
-        global tempo_Bot
-        global score
-        global lives
-        render_template("game.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
-    return render_template("wrong.html")
+    if not logged_in():
+        return render_template("wrong.html")
+    global tempo_bpm
+    global tempo_beat_note
+    global score
+    global lives
+    return render_template("juego.html", bpm = tempo_bpm, beat_note = tempo_beat_note, notes=get_notes(int(tempo_bpm), int(tempo_beat_note)), score = score, lives = lives)
+
+@app.route("/endgame/<nscore>/<nlives>")
+def record_results(nscore, nlives):
+    if not logged_in():
+        return render_template("wrong.html")
+    global score
+    score = nscore
+    global lives
+    lives = nlives
+    return redirect("/results")
 
 @app.route("/results")
 def disp_results():
-    if logged_in():
-        global score
-        old_score = database.display_score(session["user"])
-        yay = score > old_score
-        if yay:
-            database.update_score(session["user"], score)
-
-        render_template("results.html", score = score, newhighscore = yay)
-    return render_template("wrong.html")
+    if not logged_in():
+        return render_template("wrong.html")
+    global score
+    old_score = database.display_score(session["user"])
+    yay = int(score) > int(old_score)
+    if yay:
+        database.update_score(session["user"], score)
+    return  render_template("results.html", score = score, newhighscore = yay)
 
 if __name__ == "__main__":
     app.debug = True

@@ -2,6 +2,8 @@ let slate = document.getElementById("screen");
 let bpm = parseInt(document.getElementById("bpm").innerHTML);
 let beatNote = parseInt(document.getElementById("beatNote").innerHTML);
 let notes = JSON.parse(document.getElementById("notes").innerHTML);
+let notas = notes.map(note => Object.assign({}, note));
+let scoreElement = document.getElementById("score");
 let ctx = slate.getContext("2d");
 let boxWidth = 800;
 let boxHeight = 50;
@@ -53,7 +55,7 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  if (currentNote(ptime).note) {
+  if (currentNota.note) {
     ctx.fillStyle = "#00ff00";
   }
   else {
@@ -136,21 +138,31 @@ function drawNotes() {
   }
 }
 
-function currentNote(ptime) {
+function getCurrentNota(ptime) {
   let place = ptime * totalPlace;
   let index = 0;
-  while (place > notes[index].duration) {
-    place -= notes[index].duration;
+  while (place > notas[index].duration) {
+    place -= notas[index].duration;
     index ++;
   }
-  return notes[index];
+  return notas[index];
 }
+
+function click() {
+  if (currentNota.note) {
+    scoreElement.innerHTML ++;
+    currentNota.note = false;
+  }
+}
+
+let currentNota;
 
 function draw(time) {
   clear();
   drawRows();
   drawNotes();
   drawDot(0.8, 0.1, 0.75);
+  currentNota = getCurrentNota(time / totalTime);
   drawSlider(time / totalTime);
 }
 

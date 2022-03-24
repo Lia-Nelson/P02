@@ -32,6 +32,3 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
 
 def get_json(dics):
     return str(dics).lower().replace("'", '"')
-
-print(get_json(generate_rhythms(4, 4)))
-print(get_json(generate_rhythms(3, 8)))

@@ -19,16 +19,19 @@ lucasT -- 2022-03-10 21:34 -- merged ltw branch with main to add new html pages
 juliaN -- 2022-03-10 22:59 -- new version of design doc in repo, launch codes
 added
 juliaN -- 2022-03-11 8:40 -- work on metronome
-juliaN -- 2022-03-14 8:37 -- metronome improved, now consistent
+juliaN -- 2022-03-14 8:37 -- metronome improved, now consistent, visual for
+metronome added to design doc
 lucasT, lieselW -- 2022-03-15 8:40 -- login with database implemented into main
 branch
 juliaN -- 2022-03-15 8:41 -- work on rhythm generation
 juliaN -- 2022-03-16 8:37 -- rhythm generation functional
 lieselW -- 2022-03-16 8:40 -- researched password hashing // started code
-juliaN -- 2022-03-17 8:38 -- work on making functions from rhythm generation for import
+juliaN -- 2022-03-17 8:38 -- work on making functions from rhythm generation for
+import
 lieselW -- 2022-03-17 8:40 -- finished password hashing
 juliaN -- 2022-03-18 8:40 -- rhythm generation functions working
-juliaN -- 2022-03-21 8:37 -- work on how to guide, modified rhythm generation functions
+juliaN -- 2022-03-21 8:37 -- work on how to guide, modified rhythm generation
+functions
 lieselW -- 2022-03-21 8:40 -- downloaded homebrew to start droplet
 juliaN -- 2022-03-22 8:29 -- Web Audio API documentation added
 lieselW -- 2022-03-22 8:40 -- tried to download correct library, asked for help
@@ -40,16 +43,17 @@ lucasT -- 2022-03-22 16:40 -- design-doc-v01, removes leaderboard feature, adds
 ability to view self score through home page
 juliaN -- 2022-03-23 18:47 -- note guide google document created to make meaning
 of rhythms generated clear
-lieselW -- 2022-03-23 18:50-- researched how to get droplet running on a non-static website
-<<<<<<< HEAD
+lieselW -- 2022-03-23 18:50-- researched how to get droplet running on a
+non-static website
 lieselW -- 2022-03-23 00:00-- edited and uploaded design doc
 lucasT -- 2022-03-24 00:14 -- made entire screen colored
 juliaN -- 2022-03-24 00:41 -- triplets removed from rhythm generation
 =======
-lieselW -- 2022-03-23 00:00-- edited and uploaded design doc. Specifically took out parts
-                              relating to APIs (we're not using any) and specific modules used.
-                              Also edited for clarity and grammar
+lieselW -- 2022-03-23 00:00-- edited and uploaded design doc. Specifically
+took out parts relating to APIs (we're not using any) and specific modules used.
+Also edited for clarity and grammar
 lucasT -- 2022-03-24 0:14 -- made entire screen colored
 tomasA -- 2022-03-24 4:30 -- implemented game
 lucasT -- 2022-03-24 4:55 -- fixed highscore bug and smoothed animation towards the end
 juliaN -- 2022-03-24 7:07 -- fixing repo structure
+juliaN -- 2022-03-24 7:14 -- edited README

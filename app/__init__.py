@@ -6,6 +6,7 @@ from flask import Flask, render_template, request, session, redirect
 import sqlite3
 from os import urandom
 import database
+from get_notes import get_notes
 
 app = Flask(__name__)    #create Flask object
 
@@ -159,7 +160,7 @@ def disp_gamePage():
     global tempo_beat_note
     global score
     global lives
-    return render_template("juego.html", bpm = tempo_bpm, beatNote = tempo_beat_note, score = score, lives = lives)
+    return render_template("juego.html", bpm = tempo_bpm, beat_note = tempo_beat_note, notes=get_notes(int(tempo_bpm), int(tempo_beat_note)), score = score, lives = lives)
 
 @app.route("/endgame/<nscore>/<nlives>")
 def record_results(nscore, nlives):

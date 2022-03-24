@@ -1,4 +1,7 @@
 let slate = document.getElementById("screen");
+let bpm = parseInt(document.getElementById("bpm").innerHTML);
+let beatNote = parseInt(document.getElementById("beatNote").innerHTML);
+let notes = JSON.parse(document.getElementById("notes").innerHTML);
 let ctx = slate.getContext("2d");
 let boxWidth = 800;
 let boxHeight = 50;
@@ -16,6 +19,7 @@ let colWidth = boxWidth / cols;
 let startX = (slate.width - boxWidth) / 2;
 let fullHeight = boxHeight + space;
 let startY = (slate.height + space - rows * fullHeight) / 2;
+let measureLength = bpm / beatNote;
 
 ctx.lineWidth = boxThick;
 ctx.strokeStyle = boxColor;
@@ -118,8 +122,8 @@ function drawNote(ptime, note) {
   }
 }
 
-function drawNotes(measureLength, notes) {
-  let totalPlace = rows * cols * measureLength;
+function drawNotes(ml, notes) {
+  let totalPlace = rows * cols * ml;
   let place = 0;
   for (let note of notes) {
     drawNote(place / totalPlace, note);
@@ -130,7 +134,7 @@ function drawNotes(measureLength, notes) {
 function draw(time) {
   clear();
   drawRows();
-  drawNotes(1, [{duration: 0.0625, note: true}, {duration: 0.0625, note: false}, {duration: 0.375, note: true}, {duration: 0.25, note: false}, {duration: 0.125, note: false}, {duration: 0.125, note: true}, {duration: 0.1875, note: true}, {duration: 0.1875, note: true}, {duration: 0.0625, note: false}, {duration: 0.5, note: false}, {duration: 0.0625, note: true}, {duration: 0.125, note: false}, {duration: 0.5, note: true}, {duration: 0.0625, note: true}, {duration: 0.0625, note: true}, {duration: 0.25, note: true}, {duration: 0.375, note: false}, {duration: 0.5, note: true}, {duration: 0.0625, note: true}, {duration: 0.0625, note: true}, {duration: 0.75, note: true}, {duration: 0.125, note: false}, {duration: 0.125, note: false}, {duration: 0.5, note: false}, {duration: 0.25, note: false}, {duration: 0.25, note: true}, {duration: 0.75, note: true}, {duration: 0.125, note: true}, {duration: 0.125, note: false}, {duration: 1, note: true}]);
+  drawNotes(measureLength, notes);
   drawDot(0.8, 0.1, 0.75);
   drawSlider(time / totalTime);
 }
@@ -144,3 +148,5 @@ function dibujar(timestamp) {
   draw(timestamp - startTime);
   window.requestAnimationFrame(dibujar);
 }
+
+dibujar();

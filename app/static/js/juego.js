@@ -179,11 +179,15 @@ let startTime;
 let requestID;
 
 function dibujar(timestamp) {
+  window.cancelAnimationFrame(requestID);
   if (startTime === undefined) {
     startTime = timestamp;
   }
-  draw(timestamp - startTime);
-  requestID = window.requestAnimationFrame(dibujar);
+  time = timestamp - startTime;
+  draw(time);
+  let ptime = time / totalTime;
+  if (!(ptime >= 1 || livesElement.innerHTML <= 0))
+    requestID = window.requestAnimationFrame(dibujar);
 }
 
 function endGame() {

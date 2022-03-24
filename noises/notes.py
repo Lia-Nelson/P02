@@ -3,16 +3,28 @@ import random
 # number of measures
 measures = 8
 
+# notes = [
+#   {"duration": 1/16, "triplet": False},
+#   {"duration": 1/8, "triplet": True},
+#   {"duration": 3/16, "triplet": False},
+#   {"duration": 1/4, "triplet": True},
+#   {"duration": 3/8, "triplet": False},
+#   {"duration": 1/2, "triplet": True},
+#   {"duration": 3/4, "triplet": False},
+#   {"duration": 1, "triplet": True},
+#   {"duration": 3/2, "triplet": False}
+# ]
+
 notes = [
-  {"duration": 1/16, "triplet": False},
-  {"duration": 1/8, "triplet": True},
-  {"duration": 3/16, "triplet": False},
-  {"duration": 1/4, "triplet": True},
-  {"duration": 3/8, "triplet": False},
-  {"duration": 1/2, "triplet": True},
-  {"duration": 3/4, "triplet": False},
-  {"duration": 1, "triplet": True},
-  {"duration": 3/2, "triplet": False}
+  {"duration": 1/16},
+  {"duration": 1/8},
+  {"duration": 3/16},
+  {"duration": 1/4},
+  {"duration": 3/8},
+  {"duration": 1/2},
+  {"duration": 3/4},
+  {"duration": 1},
+  {"duration": 3/2}
 ]
 
 def get_max_index(remaining):
@@ -39,12 +51,14 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
       # one in three chance of being a rest
       if (random.randint(0, 2) == 0):
         note["note"] = False
-        note["triplet"] = False
+        print("Note status: " + str(note))
+        # note["triplet"] = False
       else:
         note["note"] = True
+        print("Note status: " + str(note))
         # one in three chance of remaining a triplet
-        if (note["triplet"] and random.randint(0, 2) != 0):
-          note["triplet"] = False
+        # if (note["triplet"] and random.randint(0, 2) != 0):
+        #   note["triplet"] = False
       in_measure.append(note)
     generated.append(in_measure)
   return generated

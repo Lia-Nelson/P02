@@ -19,7 +19,6 @@ let startY = (slate.height + space - rows * fullHeight) / 2;
 
 ctx.lineWidth = boxThick;
 ctx.strokeStyle = boxColor;
-ctx.fillStyle = sliderColor;
 
 function drawRows() {
   for (let row = 0; row < rows; row ++) {
@@ -49,6 +48,7 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
+  ctx.fillStyle = sliderColor;
   drawThing(sliderHelper, ptime, sliderWidth, sliderPheight, 0.5, 0.5);
 }
 
@@ -64,6 +64,7 @@ function dotHelper(x, y, width, height) {
   ctx.beginPath();
   let radius = height / 2;
   ctx.arc(x + radius, y + radius, radius, 0, Math.PI * 2);
+  ctx.fillStyle = "#000000";
   ctx.fill();
 }
 

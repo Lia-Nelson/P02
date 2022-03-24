@@ -113,6 +113,10 @@ def disp_home():
     if logged_in(): #later to be replaced with check login
         user = session["user"]
         highscore = database.display_score(user)
+        global score
+        score = 0
+        global lives
+        lives = 3
         return render_template("home.html", username = user, score = highscore)
     return render_template("wrong.html") #if not logged in, give error
 
@@ -154,7 +158,17 @@ def disp_gamePage():
         global tempo_Bot
         global score
         global lives
-        render_template("game.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
+        return render_template("gamescreen.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
+    return render_template("wrong.html")
+
+@app.route("/endgame/<nscore>/<nlives>")
+def record_results(nscore, nlives):
+    if logged_in():
+        global score
+        score = nscore
+        global lives
+        lives = nlives
+        return redirect("/results")
     return render_template("wrong.html")
 
 @app.route("/results")
@@ -162,11 +176,10 @@ def disp_results():
     if logged_in():
         global score
         old_score = database.display_score(session["user"])
-        yay = score > old_score
+        yay = int(score) > int(old_score)
         if yay:
             database.update_score(session["user"], score)
-
-        render_template("results.html", score = score, newhighscore = yay)
+        return  render_template("results.html", score = score, newhighscore = yay)
     return render_template("wrong.html")
 
 if __name__ == "__main__":

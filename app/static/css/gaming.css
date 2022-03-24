@@ -1,0 +1,8 @@
+.screen {
+  border: 1px solid black;
+  background: white;
+}
+
+.invisible {
+  display: none;
+}

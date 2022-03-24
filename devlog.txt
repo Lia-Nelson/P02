@@ -29,7 +29,9 @@ juliaN -- 2022-03-17 8:38 -- work on making functions from rhythm generation for
 lieselW -- 2022-03-17 8:40 -- finished password hashing
 juliaN -- 2022-03-18 8:40 -- rhythm generation functions working
 juliaN -- 2022-03-21 8:37 -- work on how to guide, modified rhythm generation functions
+lieselW -- 2022-03-21 8:40 -- downloaded homebrew to start droplet
 juliaN -- 2022-03-22 8:29 -- Web Audio API documentation added
+lieselW -- 2022-03-22 8:40 -- tried to download correct library, asked for help
 juliaN -- 2022-03-22 8:42 -- metronome parameterized
 lucasT -- 2022-03-22 15:51 -- merged ltw branch and liesel branch into main
 lucasT, tomasA -- 2022-03-22 16:06 -- fixed password always being sus, prevented
@@ -38,3 +40,5 @@ lucasT -- 2022-03-22 16:40 -- design-doc-v01, removes leaderboard feature, adds
 ability to view self score through home page
 juliaN -- 2022-03-23 18:47 -- note guide google document created to make meaning
 of rhythms generated clear
+lieselW -- 2022-03-23 18:50-- researched how to get droplet running on a non-static website
+lieselW -- 2022-03-23 00:00-- edited and uploaded design doc

@@ -159,7 +159,7 @@ def disp_gamePage():
     global tempo_Bot
     global score
     global lives
-    return render_template("gamescreen.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
+    return render_template("juego.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
 
 @app.route("/endgame/<nscore>/<nlives>")
 def record_results(nscore, nlives):

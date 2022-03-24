@@ -17,14 +17,14 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
     print("Beat note: " + str(beatNote))
     for i in range(measures):
         in_measure = []
+        print()
         print("Current measure: " + str(i))
         remaining = bpm / beatNote
-        print("Remaining: " + str(remaining))
         while remaining > 0:
-            print("measure: " + str(i))
             print("remaining: " + str(remaining))
             maxIndex = get_max_index(remaining)
             duration = durations[random.randint(0, maxIndex)]
+            print("just got: " + str(duration))
             remaining -= duration
             # one in three chance of being a rest
             note = {"duration": duration, "note": random.randint(0, 2) != 0}

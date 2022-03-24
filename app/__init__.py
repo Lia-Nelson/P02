@@ -11,8 +11,8 @@ app = Flask(__name__)    #create Flask object
 
 app.secret_key = urandom(24)
 
-tempo_Top = 1;
-tempo_Bot = 1;
+tempo_bpm = 1;
+tempo_beat_note = 1;
 score = 0;
 lives = 3;
 
@@ -128,26 +128,26 @@ def disp_Instructions():
 def disp_selectionPage():
     if not logged_in():
         return render_template("wrong.html")
-    global tempo_Top
-    global tempo_Bot
+    global tempo_bpm
+    global tempo_beat_note
     global score
     global lives
-    return render_template("selection.html", top=tempo_Top, bot=tempo_Bot, score = score, lives = lives)
+    return render_template("selection.html", top=tempo_bpm, bot=tempo_beat_note, score = score, lives = lives)
 
 @app.route("/selectTop/<page_id>")
 def changeTop(page_id):
     if not logged_in():
         return render_template("wrong.html")
-    global tempo_Top
-    tempo_Top = page_id
+    global tempo_bpm
+    tempo_bpm = page_id
     return redirect("/select")
 
 @app.route("/owselectBot/<page_id>")
 def changeBot(page_id):
     if not logged_in():
         return render_template("wrong.html")
-    global tempo_Bot
-    tempo_Bot = page_id
+    global tempo_beat_note
+    tempo_beat_note = page_id
     return redirect("/select")
 
 
@@ -155,11 +155,11 @@ def changeBot(page_id):
 def disp_gamePage():
     if not logged_in():
         return render_template("wrong.html")
-    global tempo_Top
-    global tempo_Bot
+    global tempo_bpm
+    global tempo_beat_note
     global score
     global lives
-    return render_template("juego.html", top = tempo_Top, bot = tempo_Bot, score = score, lives = lives)
+    return render_template("juego.html", bpm = tempo_bpm, beatNote = tempo_beat_note, score = score, lives = lives)
 
 @app.route("/endgame/<nscore>/<nlives>")
 def record_results(nscore, nlives):

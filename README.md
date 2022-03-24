@@ -1,7 +1,7 @@
 # Doink! by Doink!
 
 ## Description
-Rhythm game where the user clicks the screen on pre-ordained intervals. These are randomly generated based on the tempo and time signature.
+Rhythm game where the user clicks the screen on pre-ordained intervals. These are randomly generated based on the tempo and time signature. See if you can click a lot of notes without missing (otherwise you die) and try to rack up points from successful clicks.
 
 ## Roles
 Lia (PM): Audio/Rhythm Generation (Create Functions for JavaScript to Call)  
@@ -24,3 +24,6 @@ or <br>
 
 * Run the app  
 `$ python3 app/__init__.py`
+
+<br>
+Droplet IP: 192.241.1.156.9/

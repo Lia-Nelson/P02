@@ -10,7 +10,7 @@ def get_max_index(remaining):
         if durations[i] <= remaining:
             return i
 
-def generate_rhythms(bpm:int, beatNote:int) -> list:
+def get_notes(bpm:int, beatNote:int) -> list:
     generated = []
     print("Measures: " + str(measures))
     print("Beats per measure: " + str(bpm))

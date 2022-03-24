@@ -30,5 +30,13 @@ def generate_rhythms(bpm:int, beatNote:int) -> list:
             generated.append(note)
     return generated
 
-print(generate_rhythms(4, 4))
-print(generate_rhythms(3, 8))
+def get_js_dic(dic):
+    def get_pair(key):
+        return f"{key}: {str(dic[key]).lower()}"
+    return "{" + ", ".join(map(get_pair, dic)) + "}"
+
+def get_js_dics(dics):
+    return "[" + ", ".join(map(get_js_dic, dics)) + "]"
+
+print(get_js_dics(generate_rhythms(4, 4)))
+print(get_js_dics(generate_rhythms(3, 8)))

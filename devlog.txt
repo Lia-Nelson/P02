@@ -41,5 +41,7 @@ ability to view self score through home page
 juliaN -- 2022-03-23 18:47 -- note guide google document created to make meaning
 of rhythms generated clear
 lieselW -- 2022-03-23 18:50-- researched how to get droplet running on a non-static website
-lieselW -- 2022-03-23 00:00-- edited and uploaded design doc
+lieselW -- 2022-03-23 00:00-- edited and uploaded design doc. Specifically took out parts 
+                              relating to APIs (we're not using any) and specific modules used. 
+                              Also edited for clarity and grammar
 lucasT -- 2022-03-24 :14 -- made entire screen colored

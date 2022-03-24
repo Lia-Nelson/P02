@@ -1,0 +1,42 @@
+import random
+
+# number of measures
+measures = 8
+
+durations = [1/16, 1/8, 3/16, 1/4, 3/8, 1/2, 3/4, 1, 3/2]
+
+def get_max_index(remaining):
+    for i in range(len(durations) - 1, -1, -1):
+        if durations[i] <= remaining:
+            return i
+
+def generate_rhythms(bpm:int, beatNote:int) -> list:
+    generated = []
+    print("Measures: " + str(measures))
+    print("Beats per measure: " + str(bpm))
+    print("Beat note: " + str(beatNote))
+    for i in range(measures):
+        print()
+        print("Current measure: " + str(i))
+        remaining = bpm / beatNote
+        while remaining > 0:
+            print("remaining: " + str(remaining))
+            maxIndex = get_max_index(remaining)
+            duration = durations[random.randint(0, maxIndex)]
+            print("just got: " + str(duration))
+            remaining -= duration
+            # one in three chance of being a rest
+            note = {"duration": duration, "note": random.randint(0, 2) != 0}
+            generated.append(note)
+    return generated
+
+def get_js_dic(dic):
+    def get_pair(key):
+        return f"{key}: {str(dic[key]).lower()}"
+    return "{" + ", ".join(map(get_pair, dic)) + "}"
+
+def get_js_dics(dics):
+    return "[" + ", ".join(map(get_js_dic, dics)) + "]"
+
+print(get_js_dics(generate_rhythms(4, 4)))
+print(get_js_dics(generate_rhythms(3, 8)))

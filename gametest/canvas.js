@@ -1,7 +1,7 @@
 let slate = document.getElementById("slate");
 let ctx = slate.getContext("2d");
-let boxWidth = 400;
-let boxHeight = 70;
+let boxWidth = 800;
+let boxHeight = 50;
 let space = 20;
 let rows = 2;
 let cols = 4;
@@ -118,18 +118,19 @@ function drawNote(ptime, note) {
   }
 }
 
+function drawNotes(measureLength, notes) {
+  let totalPlace = rows * cols * measureLength;
+  let place = 0;
+  for (let note of notes) {
+    drawNote(place / totalPlace, note);
+    place += note.duration;
+  }
+}
+
 function draw(time) {
   clear();
   drawRows();
-  drawNote(0.3, {duration: 1/4, note: false});
-  drawNote(0.7, {duration: 1/2, note: false});
-  drawNote(0.6, {duration: 1/16, note: false});
-  drawNote(0.4, {duration: 1, note: false});
-  drawNote(0.45, {duration: 1/8, note: false});
-  drawNote(0.2, {duration: 3/8, note: false});
-  drawNote(0.9, {duration: 3/2, note: false});
-  drawNote(0.8, {duration: 3/16, note: false});
-  drawNote(0.1, {duration: 3/4, note: false});
+  drawNotes(1, [{duration: 0.0625, note: true}, {duration: 0.0625, note: false}, {duration: 0.375, note: true}, {duration: 0.25, note: false}, {duration: 0.125, note: false}, {duration: 0.125, note: true}, {duration: 0.1875, note: true}, {duration: 0.1875, note: true}, {duration: 0.0625, note: false}, {duration: 0.5, note: false}, {duration: 0.0625, note: true}, {duration: 0.125, note: false}, {duration: 0.5, note: true}, {duration: 0.0625, note: true}, {duration: 0.0625, note: true}, {duration: 0.25, note: true}, {duration: 0.375, note: false}, {duration: 0.5, note: true}, {duration: 0.0625, note: true}, {duration: 0.0625, note: true}, {duration: 0.75, note: true}, {duration: 0.125, note: false}, {duration: 0.125, note: false}, {duration: 0.5, note: false}, {duration: 0.25, note: false}, {duration: 0.25, note: true}, {duration: 0.75, note: true}, {duration: 0.125, note: true}, {duration: 0.125, note: false}, {duration: 1, note: true}]);
   drawDot(0.8, 0.1, 0.75);
   drawSlider(time / totalTime);
 }

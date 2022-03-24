@@ -166,18 +166,29 @@ function draw(time) {
   drawRows();
   drawNotes();
   drawDot(0.8, 0.1, 0.75);
-  currentNota = getCurrentNota(time / totalTime);
-  drawSlider(time / totalTime);
+  let ptime = time / totalTime;
+  console.log(livesElement.innerHTML <= 0);
+  if (ptime >= 1 || livesElement.innerHTML <= 0) {
+    endGame();
+  }
+  currentNota = getCurrentNota(ptime);
+  drawSlider(ptime);
 }
 
 let startTime;
+let requestID;
 
 function dibujar(timestamp) {
   if (startTime === undefined) {
     startTime = timestamp;
   }
   draw(timestamp - startTime);
-  window.requestAnimationFrame(dibujar);
+  requestID = window.requestAnimationFrame(dibujar);
+}
+
+function endGame() {
+  window.cancelAnimationFrame(requestID);
+  window.location.replace("/endgame/" + scoreElement.innerHTML + "/" + livesElement.innerHTML);
 }
 
 slate.addEventListener("click", click);

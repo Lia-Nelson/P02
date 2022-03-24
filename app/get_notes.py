@@ -10,15 +10,15 @@ def get_max_index(remaining):
         if durations[i] <= remaining:
             return i
 
-def get_notes(bpm:int, beatNote:int) -> list:
+def get_notes_dict(bpm:int, beat_note:int) -> list:
     generated = []
     print("Measures: " + str(measures))
     print("Beats per measure: " + str(bpm))
-    print("Beat note: " + str(beatNote))
+    print("Beat note: " + str(beat_note))
     for i in range(measures):
         print()
         print("Current measure: " + str(i))
-        remaining = bpm / beatNote
+        remaining = bpm / beat_note
         while remaining > 0:
             print("remaining: " + str(remaining))
             maxIndex = get_max_index(remaining)
@@ -30,5 +30,5 @@ def get_notes(bpm:int, beatNote:int) -> list:
             generated.append(note)
     return generated
 
-def get_json(dics):
-    return str(dics).lower().replace("'", '"')
+def get_notes(bpm, beat_note):
+    return str(get_notes_dict(bpm, beat_note)).lower().replace("'", '"')

@@ -61,7 +61,10 @@ function clear() {
 }
 
 function drawNote(ptime, note) {
-  if (note.duration == 1/8) {
+  if (note.duration == 1/16) {
+    drawImage(ptime, sixteenthNote, 0.7, 0.3, 0.5);
+  }
+  else if (note.duration == 1/8) {
     drawImage(ptime, eighthNote, 0.7, 0.3, 0.5);
   }
   else if (note.duration == 1/4) {
@@ -80,6 +83,7 @@ function draw(time) {
   drawRows();
   drawNote(0.3, {duration: 1/4});
   drawNote(0.7, {duration: 1/2});
+  drawNote(0.6, {duration: 1/16});
   drawNote(0.4, {duration: 1});
   drawNote(0.45, {duration: 1/8});
   drawSlider(time / totalTime);

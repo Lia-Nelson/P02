@@ -1,3 +1,5 @@
+let sixteenthNote = new Image();
+sixteenthNote.src = "images/sixteenth_note.svg";
 let eighthNote = new Image();
 eighthNote.src = "images/eighth_note.svg";
 let quarterNote = new Image();

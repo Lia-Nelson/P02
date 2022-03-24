@@ -142,5 +142,5 @@ function dibujar(timestamp) {
     startTime = timestamp;
   }
   draw(timestamp - startTime);
-  requestID = window.requestAnimationFrame(dibujar);
+  window.requestAnimationFrame(dibujar);
 }

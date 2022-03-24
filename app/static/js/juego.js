@@ -53,7 +53,12 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  ctx.fillStyle = sliderColor;
+  if (onNote(ptime)) {
+    ctx.fillStyle = "#00ff00";
+  }
+  else {
+    ctx.fillStyle = "#808080";
+  }
   drawThing(sliderHelper, ptime, sliderWidth, sliderPheight, 0.5, 0.5);
 }
 
@@ -129,6 +134,16 @@ function drawNotes() {
     drawNote(place / totalPlace, note);
     place += note.duration;
   }
+}
+
+function onNote(ptime) {
+  let place = ptime * totalPlace;
+  let index = 0;
+  while (place > notes[index].duration) {
+    place -= notes[index].duration;
+    index ++;
+  }
+  return notes[index].note;
 }
 
 function draw(time) {

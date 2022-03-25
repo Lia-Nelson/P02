@@ -25,6 +25,10 @@ let startY = (slate.height + space - rows * fullHeight) / 2;
 let measureLength = bpm / beatNote;
 let totalPlace = rows * cols * measureLength;
 
+let clickCooldown = 0;
+let goodColorTime = 0;
+let badColorTime = 0;
+
 ctx.lineWidth = boxThick;
 ctx.strokeStyle = boxColor;
 
@@ -56,8 +60,11 @@ function sliderHelper(x, y, width, height) {
 }
 
 function drawSlider(ptime) {
-  if (currentNota.note) {
+  if (goodColorTime > 0) {
     ctx.fillStyle = "#00ff00";
+  }
+  else if (badColorTime > 0){
+    ctx.fillStyle = "#FF0000";
   }
   else {
     ctx.fillStyle = "#808080";
@@ -150,16 +157,22 @@ function getCurrentNota(ptime) {
 }
 
 function click() {
-  if (currentNota.note) {
-    scoreElement.innerHTML ++;
-    currentNota.note = false;
-  }
-  else {
-    livesElement.innerHTML --;
+  if (clickCooldown <= 0){
+    clickCooldown = 1;
+    if (currentNota.note) {
+      scoreElement.innerHTML ++;
+      currentNota.note = false;
+      goodColorTime = 3;
+    }
+    else {
+      livesElement.innerHTML --;
+      badColorTime = 3;
+    }
   }
 }
 
 let currentNota;
+let alreadyOn = false;
 
 function draw(time) {
   clear();
@@ -172,6 +185,14 @@ function draw(time) {
     endGame();
   }
   currentNota = getCurrentNota(ptime);
+  if (currentNota.note && !alreadyOn){
+    metronomeOn();
+    alreadyOn = true;
+  }
+  else if (!currentNota.note && alreadyOn){
+    metronomeOff();
+    alreadyOn = false;
+  }
   drawSlider(ptime);
 }
 
@@ -183,11 +204,25 @@ function dibujar(timestamp) {
   if (startTime === undefined) {
     startTime = timestamp;
   }
+  if (clickCooldown > 0){
+    clickCooldown--;
+  }
+  if (goodColorTime > 0){
+    goodColorTime--;
+  }
+  if (badColorTime > 0){
+    badColorTime--;
+  }
   time = timestamp - startTime;
   draw(time);
   let ptime = time / totalTime;
   if (!(ptime >= 1 || livesElement.innerHTML <= 0))
     requestID = window.requestAnimationFrame(dibujar);
+}
+
+function stopIt(){
+  window.cancelAnimationFrame(requestID);
+  console.log("stopping animation");
 }
 
 function endGame() {
@@ -197,4 +232,114 @@ function endGame() {
 
 slate.addEventListener("click", click);
 
-dibujar();
+setTimeout(function(){
+  clear();
+  drawRows();
+  drawNotes();
+  drawDot(0.8, 0.1, 0.75);
+},1);
+
+setTimeout(function(){
+  tiem = document.getElementById("timer")
+  tiem.innerHTML--;
+},200);
+
+setTimeout(function(){
+  tiem = document.getElementById("timer")
+  tiem.innerHTML--;
+},400);
+
+setTimeout(function(){
+  tiem = document.getElementById("timer")
+  tiem.innerHTML--;
+},600);
+setTimeout(function(){
+  tiem = document.getElementById("timer")
+  tiem.innerHTML--;
+},800);
+
+setTimeout(function(){
+  tiem = document.getElementById("timer")
+  tiem.innerHTML--;
+},100);
+
+setTimeout(function(){
+  // metronomeOn();
+  dibujar();
+},1000);
+
+
+// Defaults
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+var context = new AudioContext();
+var timer, noteCount;
+var curTime = 0.0;
+
+// scheduler, run every .1 milliseconds
+function schedule() {
+	// console.log("Tempo: " + tempo)
+	// console.log("Bpm: " + bpm)
+  while(curTime < context.currentTime) {
+		// playNote(curTime);
+    playNote(context.currentTime);
+		updateTime();
+	}
+}
+
+// Adds a beat worth to time and increase note count
+function updateTime() {
+	// seconds per beat
+	var spb = bpm * 1000;
+  curTime += spb;
+  noteCount+=10;
+}
+
+// Plays note starting at time t
+function playNote(t) {
+	var note = context.createOscillator();
+  // sets noteCount to 0 when end of
+  // measure reached
+  if (noteCount >= 1) {
+    noteCount = 0;
+  }
+	// if first note in measure, plays
+  // higher frequency
+  if (noteCount == 0) {
+    note.frequency.value = 392.00;
+    console.log("starting measure");
+  }
+	// else plays lower frequency
+	else {
+  	note.frequency.value = 261.63;
+    console.log("other note");
+  }
+  // connects oscillator for notes
+  // to destination for audio context
+  note.connect(context.destination);
+  console.log("noteCount = " + noteCount);
+  console.log("playing note");
+  // plays frequency of oscilator for 0.05
+  // seconds
+  note.start(t);
+  note.stop(t + 0.05);
+}
+
+// starts metronome by setting interval for
+// schedule,, setting the current time in
+// program and setting the noteCount to 0
+// tempo gives beats per minute
+// bpm gives beats per measure
+function metronomeOn() {
+	console.log("starting");
+  noteCount = 0;
+  curTime = context.currentTime;
+  timer = setInterval(schedule, .01);
+}
+
+// stops metronome by clearing interval
+function metronomeOff() {
+  console.log("stopping");
+  // console.log(timer);
+  timer = clearInterval(timer);
+  // console.log(timer);
+}

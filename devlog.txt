@@ -58,3 +58,4 @@ lucasT -- 2022-03-24 4:55 -- fixed highscore bug and smoothed animation towards 
 juliaN -- 2022-03-24 7:07 -- fixing repo structure
 juliaN -- 2022-03-24 7:14 -- edited README
 lucasT -- 2022-03-24 23:37 -- sounds, colored lights, countdown before starting game --> doink!!
+juliaN -- 2022-03-25 8:37 -- metronome associated with site fixes

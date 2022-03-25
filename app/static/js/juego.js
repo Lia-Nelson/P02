@@ -289,7 +289,7 @@ function schedule() {
 // Adds a beat worth to time and increase note count
 function updateTime() {
 	// seconds per beat
-	var spb = bpm * 1000;
+	var spb = totalTime / (8 * bpm);
   curTime += spb;
   noteCount+=10;
 }

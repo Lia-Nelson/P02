@@ -149,11 +149,16 @@ function drawNotes() {
 function getCurrentNota(ptime) {
   let place = ptime * totalPlace;
   let index = 0;
-  while (place > notas[index].duration) {
-    place -= notas[index].duration;
-    index ++;
+  try{
+    while (place > notas[index].duration) {
+      place -= notas[index].duration;
+      index ++;
+    }
+    return notas[index];
   }
-  return notas[index];
+  catch{
+    return 0;
+  }
 }
 
 function click() {
@@ -185,14 +190,14 @@ function draw(time) {
     endGame();
   }
   currentNota = getCurrentNota(ptime);
-  if (currentNota.note && !alreadyOn){
-    metronomeOn();
-    alreadyOn = true;
-  }
-  else if (!currentNota.note && alreadyOn){
-    metronomeOff();
-    alreadyOn = false;
-  }
+  // if (currentNota.note && !alreadyOn){
+  //   metronomeOn();
+  //   alreadyOn = true;
+  // }
+  // else if (!currentNota.note && alreadyOn){
+  //   metronomeOff();
+  //   alreadyOn = false;
+  // }
   drawSlider(ptime);
 }
 
@@ -264,7 +269,7 @@ setTimeout(function(){
 },100);
 
 setTimeout(function(){
-  // metronomeOn();
+  metronomeOn();
   dibujar();
 },1000);
 
@@ -291,7 +296,7 @@ function updateTime() {
 	// seconds per beat
 	var spb = totalTime / (8 * bpm);
   curTime += spb;
-  noteCount+=10;
+  noteCount++;
 }
 
 // Plays note starting at time t
@@ -299,7 +304,7 @@ function playNote(t) {
 	var note = context.createOscillator();
   // sets noteCount to 0 when end of
   // measure reached
-  if (noteCount >= 1) {
+  if (noteCount >= bpm) {
     noteCount = 0;
   }
 	// if first note in measure, plays
@@ -333,7 +338,7 @@ function metronomeOn() {
 	console.log("starting");
   noteCount = 0;
   curTime = context.currentTime;
-  timer = setInterval(schedule, .01);
+  timer = setInterval(schedule, .1);
 }
 
 // stops metronome by clearing interval

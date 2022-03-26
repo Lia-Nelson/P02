@@ -87,10 +87,11 @@ def display_score(username):
     # print("good1")
     cur.execute("SELECT highScore FROM users WHERE LOWER(username) = LOWER(?)", (username,))
     # print("good2")
-    score = cur.fetchone()[0]
+    score = cur.fetchone()
     if score is None:
         return 0
     else:
+        score = score[0]
         return score
 
 def update_score(username, score):

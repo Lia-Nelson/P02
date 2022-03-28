@@ -231,6 +231,7 @@ function stopIt(){
 }
 
 function endGame() {
+  metronomeOff();
   window.cancelAnimationFrame(requestID);
   window.location.replace("/endgame/" + scoreElement.innerHTML + "/" + livesElement.innerHTML);
 }
@@ -269,7 +270,7 @@ setTimeout(function(){
 },100);
 
 setTimeout(function(){
-  metronomeOn();
+  metronomeOn(bpm * 95, 4);
   dibujar();
 },1000);
 
@@ -280,31 +281,32 @@ var context = new AudioContext();
 var timer, noteCount;
 var curTime = 0.0;
 
+
 // scheduler, run every .1 milliseconds
-function schedule() {
+function schedule(tempo, qbpm) {
 	// console.log("Tempo: " + tempo)
 	// console.log("Bpm: " + bpm)
   while(curTime < context.currentTime) {
 		// playNote(curTime);
-    playNote(context.currentTime);
-		updateTime();
+    playNote(context.currentTime, qbpm);
+		updateTime(tempo);
 	}
 }
 
 // Adds a beat worth to time and increase note count
-function updateTime() {
+function updateTime(tempo) {
 	// seconds per beat
-	var spb = totalTime / (8 * bpm);
+	var spb = 60 / tempo;
   curTime += spb;
   noteCount++;
 }
 
 // Plays note starting at time t
-function playNote(t) {
+function playNote(t, qbpm) {
 	var note = context.createOscillator();
   // sets noteCount to 0 when end of
   // measure reached
-  if (noteCount >= bpm) {
+  if (noteCount == qbpm) {
     noteCount = 0;
   }
 	// if first note in measure, plays
@@ -334,11 +336,19 @@ function playNote(t) {
 // program and setting the noteCount to 0
 // tempo gives beats per minute
 // bpm gives beats per measure
-function metronomeOn() {
+function metronomeOn(tempo, qbpm) {
 	console.log("starting");
   noteCount = 0;
   curTime = context.currentTime;
-  timer = setInterval(schedule, .1);
+  timer = setInterval(schedule, .1, tempo, qbpm);
+}
+
+// stops metronome by clearing interval
+function metronomeOff() {
+  console.log("stopping");
+  // console.log(timer);
+  timer = clearInterval(timer);
+  // console.log(timer);
 }
 
 // stops metronome by clearing interval

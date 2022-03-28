@@ -92,6 +92,8 @@ def display_score(username):
         return 0
     else:
         score = score[0]
+        if score is None:
+            return 0
         return score
 
 def update_score(username, score):

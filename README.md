@@ -25,8 +25,8 @@ or <br>
 * Run the app  
 `$ python3 app/__init__.py`
 
-<br>
-Droplet IP: 192.241.156.9 or click [here](http://192.241.156.9)
+## Droplet
+Droplet IP: 192.241.156.9 or click [here](192.241.156.9)
 
 ## APIs
 No APIs from API KB used.  
